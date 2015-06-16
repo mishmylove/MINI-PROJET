@@ -19,11 +19,12 @@ public class Main {
      * Main function used for test etc ... 
      * @param args 
      */
+    /*
 	public static void main(String[] args) {
 
             
             System.out.println("hello hallouuul ! ");
 	
-	}
+	}*/
     
 }
