@@ -1,0 +1,264 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Real State Agency</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="  css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="  js/jquery.min.js"></script>
+				<!-- Include the Etalage files -->
+					<link rel="stylesheet" href="css/etalage.css">
+					<script src="js/jquery.etalage.min.js"></script>
+				<!-- Include the Etalage files -->
+				<script src="https://maps.googleapis.com/maps/api/js"></script>
+				<script>
+						jQuery(document).ready(function($){
+			
+							$('#etalage').etalage({
+								thumb_image_width: 400,
+								thumb_image_height: 250,
+								show_hint: true,
+								click_callback: function(image_anchor, instance_id){
+									alert(image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+								}
+							});
+							
+					});
+
+		 function initialize() {
+        var mapCanvas = document.getElementById('map-canvas');
+        var mapOptions = {
+          center: new google.maps.LatLng(36.792441, 10.176632) ,
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions)
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+				</script>
+</head>
+<body>
+        <div class="header-top-site">
+	    <div class="wrap"> 
+		<div class="logo">
+	    <a href="index.html">TN MOB</a>
+	    </div></div></div>
+   		<div class="recherche"><form>
+   		<input type="text" placeholder="recherche dans le site ..." class="" >
+   		<input type="submit" class="serach">
+    	</form></div>
+		<div id="socialcontact">
+        <a href="https://twitter.com" target="_blank" class="twitter"></a>
+        <a href="https://www.facebook.com" target="_blank" class="facebook"></a>
+        </div> 
+  		<div class="Descrip">
+		<p>Tunisian Real State Agency </p>
+	    </div>
+<!--   *******************************Create a count ***********************************!-->
+		<div class="md-modal md-effect-12" id="modal-12">
+		<div class="md-content">
+		<div class="register_account">
+        <div class="wrap">
+    	<h4 class="title">Créer un compte</h4>
+        <form>
+    	<div class="col_1_of_2 span_1_of_2">
+		<div>
+		<input type="text"   placeholder="nom" required><input type="text"   placeholder="prenom" required></div>
+		<div><input type="Mail" placeholder="E-Mail" class="allinput" required></div>
+		<div><input type="password" placeholder="password" class="allinput"  required></div>
+		<div><input type="password" placeholder="Confirmer votre password" class="allinput" required></div>
+		<div><select id="country" name="Type de compte" class="frm-field required" required>
+		<option value="null">Type de compte </option>         
+		<option value="AX">vendeur</option>
+		<option value="AF">Gérant</option>
+		<option value="AF">Administrateur</option>
+		</select> <input type="text" placeholder="Entreprise" ><input type="text" placeholder="Address"  required></div>	
+		<div><input type="text" placeholder="Cité" ><input type="number" placeholder="Code postale " ></div>
+		<div><input type="Tel" placeholder="Tel :(+216) 24 66 66 66"  class="allinput" required></div>
+		</div>
+		<button class="btn-count">créer un compte</button>
+		<p class="terms"><a href="#">Terms &amp; Conditions</a>.</p>
+	    <div class="clear"></div>
+		</form>
+        </div> 
+    	<button class="md-close">Close me!</button>
+        </div>
+		</div>
+		</div>
+		</div>
+		<!--   *******************************login ***********************************!-->
+        <div class="md-modal md-effect-12" id="modal-13">
+	    <div class="md-content">
+		<div class="register_account">
+        <div class="wrap">
+        <h4 class="title">Login</h4>
+        <form>
+    	<div class="col_1_of_2 span_1_of_2">
+		<div>
+		<div><input type="Mail" placeholder="Login" class="allinput" required></div>
+		<div><input type="password" placeholder="password" class="allinput"  required></div>
+		</div>
+		<button class="btn-login">Login</button>
+		<p class="terms"><a href="#">Mot de passe oublié ?</a></p>
+		<div class="clear"></div>
+		</form>
+    	</div> 
+    	<button class="md-close">Close me!</button>
+        </div>
+		</div>
+		</div>
+		</div>
+ <!-- *******************************  Header Tooooooop  ********************************************  !-->
+        <div class="header-top">
+	    <div class="wrap"> 
+	    <div class="cssmenu">
+		<ul>
+	    <li class="active"><button class="md-trigger" data-modal="modal-13">Login</button></li> 
+	    <li><button class="md-trigger" data-modal="modal-12">Mon compte</button></li> 		
+		</ul>
+		</div>
+		<ul class="icon2 sub-icon2 profile_img">
+		<li><a class="active-icon c2" href="#"> </a>
+		<ul class="sub-icon2 list">
+		<li><h3><strong>Panier</strong></h3><a href=""></a></li>
+		<li><p>Votre panier est vide  <a href="">choisir un produit</a></p></li>
+		</ul>
+		</li>
+		</ul>
+		<div class="clear"></div>
+ 	    </div>
+   	    </div>
+
+		<div class="md-overlay"></div><!-- the overlay element -->
+		
+      	<div class="singleslid">
+        <div class="wrap">
+		</div>
+		<div class="cont-slid span_2_of_slid">
+		<div class="labout span_1_of_a1">
+		<!-- start product_slider -->
+		<ul id="etalage">
+		<li>
+		<a href="optionallink.html">
+		<img class="etalage_thumb_image" src="images/11.jpeg" />
+		<img class="etalage_source_image" src="images/11.jpeg" />
+		</a>
+		</li>
+		<li>
+		<img class="etalage_thumb_image" src="images/11.jpeg" />
+		<img class="etalage_source_image" src="images/11.jpeg" />
+		</li>
+		</ul>
+
+        <div class="clear"></div>
+	    <div class="cont-slid span_2_of_slid " id="map-canvas"></div>
+		</div>
+	    <div class="cont1 span_2_of_a1">
+		<h3 class="m_prod">Maison a vendre</h3>
+		<div class="price_single">
+		<span class="reducedfrom">66.000 dt</span>
+	    <span class="actualslid">120.000 dt</span>
+
+		</div>
+		<div class="clear"></div>
+		<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+	    <div class="Descr">
+     	<h3 class="m_3">Details</h3>
+     	<p class="m_text"> Ici , vous trouvez les détails principale sur le produit a vendre ou a allouer ...   
+     	he "Times square" bed is in a converted warehouse loft named for New York's infamous Times Square !
+		After June 20th, we'll convert this loft into a girls room. Sorry guys! We will only take reservations from ladies.
+		Our building was once a textile manufacturing plant, turned huge awesome loft! Check out a funky shared creative space and explore a new, and unique way of living in the hipster heart Brooklyn.
+		Be fun, be cool, and be nice! However, please keep in mind that my place is not a hotel! I open my house for fabulous and respectful guests who expect their stay to be simple, affordable and memorable. I want all of you globetrotters to love New York as much as I do!   </p>
+     	</div>					
+		<div class="Descr">
+     	<h3 class="m_3">Condition et Paiment</h3>
+     	<p class="m_text"> Ici vous trouvez les  condition de paiment et de vente péparer par le vendeur , aussi toutes au tarif sur le produit  a vendre ...</p>
+    	</div>
+        <div><form><input type="submit" value="Reserver" class="resbtn" ></form></div>
+    	</div>
+    	<div class="clear"></div>
+	 	</div>
+     	</div>
+     	<div class="clear"></div>
+   <!-- footer !-->
+        <div class="footer">
+       	 <div class="footer-bottom">
+       	 <div class="wrap">
+       	 <div class="section group">
+       	 <div class="" style="width: 79%;">
+		<div class="col_1_of_5 span_1_of_5">
+		<h3 class="m_9">Immobiliere</h3>
+		<ul class="list1">
+	    <li><a href="#">Demande</a></li>
+	    <li><a href="#">Offres</a></li>
+	    </ul>
+		</div>
+		<div class="col_1_of_5 span_1_of_5">
+		<h3 class="m_9">Location</h3>
+		<ul class="list1">
+		<li><a href="#">Location</a></li>
+		<li><a href="#">Vente</a></li>
+		<li><a href="#">Location Vacances</a></li>
+		<li><a href="#">Bureaux & Commerces</a></li>
+		</ul>
+	    </div>
+		<div class="col_1_of_5 span_1_of_5">
+		<h3 class="m_9">Ruberique</h3>
+		<ul class="list1">
+	    <li><a href="index.html">Acceuil</a></li>
+		<li><a href="#">Nos Services</a></li>
+		<li><a href="#">FAQ</a></li>
+		</ul>
+		</div>
+	    </div>				
+	    <div>
+	    <div class="logo-footer"><div class="logo-f">
+		<a href="index.html">TN MOB</a>     
+	    </div>
+	    <div class="aboutp">
+	    <p>
+        Agence immobilére Tunisienne
+			 </p>
+			 <div id="socialcontactfooter">
+       			 <a href="https://twitter.com" target="_blank" class="twitter"></a>
+        			<a href="https://www.facebook.com" target="_blank" class="facebook"></a>
+        	</div> 
+			 </div></div>
+                 </div>
+				<div class="clear"></div>
+			</div>  
+       	 	</div>
+       	 </div>
+       </div>
+		<div class="copy">
+       	   <div class="wrap">
+       	   	  <p>© All rights reserved | by EspritGroupe6</p>
+       	   </div>
+       	 </div>
+       <script type="text/javascript">
+			$(document).ready(function() {
+				var defaults = {
+		  			containerID: 'toTop',
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+		 		};
+				$().UItoTop({ easingType: 'easeOutQuart' });
+			});
+		</script>
+		<script src="js/classie.js"></script>
+		<script src="js/modalEffects.js"></script>
+        <a href="#" id="toTop" style="display: block; color: #fff"> top </a>
+        <!-- top scrolling -->
+		<script type="text/javascript" src="  js/move-top.js"></script>
+		<script type="text/javascript" src="  js/easing.js"></script>
+   		<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+			});
+		});
+	</script>
+</body>
+</html>
