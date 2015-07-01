@@ -45,6 +45,11 @@ public class UserType implements Serializable {
         this.id = id;
     }
 
+    public UserType(Integer id, String description) {
+        this.id = id;
+        this.description = description;
+    }
+
     public Integer getId() {
         return id;
     }

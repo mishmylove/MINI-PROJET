@@ -19,7 +19,7 @@ public class DBcon {
 	/**
 	 * 
 	 */
-	static String		url		= "jdbc:mysql://localhost:3306/realestatedb";
+	static String		url     = "jdbc:mysql://localhost:3306/realestatedb";
 	static String		user	= "root";
 	static String		pass	= "";
 	static Connection	con;
