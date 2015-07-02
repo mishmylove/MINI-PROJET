@@ -28,12 +28,13 @@ public class MainGuiBuilder extends javax.swing.JFrame {
      */
     User appUser,updateUser;
     public static String SelectedId = "-1";
+    public static ArrayList<User>  listUser;
 
     public MainGuiBuilder() {
         initComponents();
 
     }
-    UserService uService = new UserService();
+    public static UserService uService = new UserService();
 
     // table stuff
     /**
@@ -337,8 +338,8 @@ public class MainGuiBuilder extends javax.swing.JFrame {
          } else {
          passwordText.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
          msqLabel.setVisible(false);
-         }*/
-
+         }
+*/
         // go for login 
         //appUser = uService.loginByMail(loginText.getText(), passwordText.getText());
         appUser = uService.loginByMail("Admin@admin.com", "admin");
@@ -378,22 +379,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     private void tabContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabContainerMouseClicked
         // TODO add your handling code here:
         
-         DefaultTableModel userTabelModel = (DefaultTableModel) UserTable.getModel();
-        
-        ArrayList<User> listUser = uService.getUserList();
-        //userTableModel.
-         userTabelModel.setRowCount(listUser.size());
-        for (int i = 0; i < listUser.size(); i++) {
-
-            UserTable.setValueAt(listUser.get(i).getId(), i, 0);
-            UserTable.setValueAt(listUser.get(i).getNom(), i, 1);
-            UserTable.setValueAt(listUser.get(i).getPrenom(), i, 2);
-            UserTable.setValueAt(listUser.get(i).getMail(), i, 3);
-            UserTable.setValueAt(listUser.get(i).getPassword(), i, 4);
-            UserTable.setValueAt(listUser.get(i).getAdresse(), i, 5);
-            UserTable.setValueAt(listUser.get(i).getTelephone(), i, 6);
-            UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
-        }
+        UserTableUpdate();
 
 
     }//GEN-LAST:event_tabContainerMouseClicked
@@ -417,6 +403,27 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         new GestUser(updateUser).setVisible(true);
     }//GEN-LAST:event_UserTableMouseClicked
 
+    
+    public static void UserTableUpdate(){
+    
+    
+     DefaultTableModel userTabelModel = (DefaultTableModel) UserTable.getModel();
+        
+         listUser = uService.getUserList();
+        //userTableModel.
+         userTabelModel.setRowCount(listUser.size());
+        for (int i = 0; i < listUser.size(); i++) {
+
+            UserTable.setValueAt(listUser.get(i).getId(), i, 0);
+            UserTable.setValueAt(listUser.get(i).getNom(), i, 1);
+            UserTable.setValueAt(listUser.get(i).getPrenom(), i, 2);
+            UserTable.setValueAt(listUser.get(i).getMail(), i, 3);
+            UserTable.setValueAt(listUser.get(i).getPassword(), i, 4);
+            UserTable.setValueAt(listUser.get(i).getAdresse(), i, 5);
+            UserTable.setValueAt(listUser.get(i).getTelephone(), i, 6);
+            UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -464,8 +471,8 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     private javax.swing.JPanel MonCompte;
     private javax.swing.JPanel NewsLetter;
     private javax.swing.JPanel Statistiques;
-    private javax.swing.JTable UserTable;
-    private javax.swing.JScrollPane UserTableScroll;
+    public static javax.swing.JTable UserTable;
+    javax.swing.JScrollPane UserTableScroll;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

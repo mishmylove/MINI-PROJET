@@ -40,4 +40,18 @@ public class UserService {
                 return null;
             }
      }
+     
+     
+      public int deleteUser(User u){
+     
+            try {
+                return uDAO.deleteUser(u);
+            } catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+                return 0;
+            }
+     }
+     
+     
+     
 }

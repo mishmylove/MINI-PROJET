@@ -24,7 +24,7 @@ public class UserDAO {
     static Statement ste;
     String insertQuery = " insert into user (nom, prenom, age)" + " values (?, ?, ?)";
     String updateQuery = " insert into user (nom, prenom, age)" + " values (?, ?, ?)";
-    String deleteQuery = " insert into user (nom, prenom, age)" + " values (?, ?, ?)";
+    String deleteQuery = " DELETE FROM `user` WHERE id = ?";
     
     String selectAllQuery = "select * from  user ;";
     String selectByMail = "select * from  user where mail = ? and password = ? ;";
@@ -36,7 +36,11 @@ public class UserDAO {
     PreparedStatement psSelectByMail;
 
     ResultSet res;
-
+    /**
+     * getUserList
+     * @return user list 
+     * @throws SQLException 
+     */
     public ArrayList<User> getUserList() throws SQLException {
         ArrayList<User> userList = new ArrayList<User>();
         psSelectAll = con.prepareStatement(selectAllQuery);
@@ -51,7 +55,13 @@ public class UserDAO {
         userList.toString();
         return userList;
     }
-    
+    /**
+     * loginByMail
+     * @param mail
+     * @param password
+     * @return user if exists else null
+     * @throws SQLException 
+     */
       public User loginByMail(String mail,String password) throws SQLException {
        
         psSelectByMail = con.prepareStatement(selectByMail);
@@ -66,6 +76,18 @@ public class UserDAO {
         }
         
     }
+     /**
+      * deleteUser
+      * @param u user 
+      * @return 1 if deleted succ else return 0 
+      * @throws SQLException 
+      */ 
+    public int deleteUser(User u) throws SQLException {
+        psDelete = con.prepareStatement(deleteQuery);
+        psDelete.setString(1, String.valueOf(u.getId()));
+        return psDelete.executeUpdate();
+        
+    }  
 
     public int AddUser(User u) throws SQLException {
 
