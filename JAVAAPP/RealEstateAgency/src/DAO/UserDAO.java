@@ -22,7 +22,7 @@ public class UserDAO {
 
     static Connection con = DBcon.getInstance();
     static Statement ste;
-    String insertQuery = " insert into user (nom, prenom, age)" + " values (?, ?, ?)";
+    String insertQuery = " INSERT INTO `user`(`nom`, `prenom`, `mail`, `password`, `adresse`, `telephone`, `type`) VALUES (?,?,?,?,?,?,?)";
     String updateQuery = " UPDATE `user` SET `nom`= ?,`prenom`= ?,`mail`= ?,`password`= ?,`adresse`= ?,`telephone`= ?,`type`= ? WHERE id = ?";
     String deleteQuery = " DELETE FROM `user` WHERE id = ?";
 
@@ -139,8 +139,15 @@ public class UserDAO {
     }
 
     public int AddUser(User u) throws SQLException {
-
-        return 0;
+        psInsert = con.prepareStatement(insertQuery);
+        psInsert.setString(1, String.valueOf(u.getNom()));
+        psInsert.setString(2, String.valueOf(u.getPrenom()));
+        psInsert.setString(3, String.valueOf(u.getMail()));
+        psInsert.setString(4, String.valueOf(u.getPassword()));
+        psInsert.setString(5, String.valueOf(u.getAdresse()));
+        psInsert.setString(6, String.valueOf(u.getTelephone()));
+        psInsert.setString(7, String.valueOf(u.getUserType()));
+        return psInsert.executeUpdate();
     }
 
 }

@@ -67,5 +67,14 @@ public class UserService {
             return null;
         }
     }
+    
+    public int AddUser(User u) {
+        try {
+            return uDAO.AddUser(u);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
 
 }

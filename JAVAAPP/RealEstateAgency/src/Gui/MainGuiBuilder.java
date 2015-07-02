@@ -234,6 +234,11 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         });
 
         addUserButton.setText("Ajouter Utilisateur");
+        addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addUserButtonMouseClicked(evt);
+            }
+        });
 
         filterUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "prenom", "mail", "adresse", "telephone", "type" }));
 
@@ -440,6 +445,11 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
         }
     }//GEN-LAST:event_searchUserKeyReleased
+
+    private void addUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserButtonMouseClicked
+        // TODO add your handling code here:
+         new addUser().setVisible(true);
+    }//GEN-LAST:event_addUserButtonMouseClicked
 
     
     public static void UserTableUpdate(){
