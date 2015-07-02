@@ -70,7 +70,6 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -82,17 +81,6 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,8 +212,8 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-772)/2, (screenSize.height-548)/2, 772, 548);
+        setSize(new java.awt.Dimension(772, 548));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void usersTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTabMouseClicked
@@ -243,7 +231,7 @@ public class Dashboard extends javax.swing.JFrame {
         Connection con = DBcon.getInstance();
 
         User u = new User();
-        int type = 0;
+        String type = "";
          int id = 0;
          String nom = null ;
          String prenom = null ;
@@ -270,7 +258,7 @@ public class Dashboard extends javax.swing.JFrame {
           mail = res.getString("mail");
           adresse = res.getString("adresse");
           tel = res.getString("telephone");
-          type = res.getInt("type");
+          type = res.getString("type");
           nbr = res.getRow();
 //          String sql2 = "select * from user_type";
 //          Statement ste2  = con.prepareStatement(sql2);
@@ -318,7 +306,6 @@ model.setRowCount(Us.size());
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

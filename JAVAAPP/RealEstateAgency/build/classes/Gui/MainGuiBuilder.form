@@ -26,18 +26,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="MainJpanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="MainJpanel" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="MainJpanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="606" max="32767" attributes="0"/>
-          </Group>
+          <Component id="MainJpanel" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -62,49 +56,67 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="289" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="LoginButton" pref="300" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="164" max="-2" attributes="0"/>
+                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="msqLabel" min="-2" pref="356" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jPasswordField1" pref="300" max="32767" attributes="0"/>
-                              <Component id="jTextField2" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" pref="229" max="-2" attributes="0"/>
+                              <Component id="LoginButton" pref="300" max="32767" attributes="0"/>
+                              <Component id="passwordText" pref="300" max="32767" attributes="0"/>
+                              <Component id="loginText" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="91" max="-2" attributes="0"/>
+                          <EmptySpace pref="629" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="loginText" min="-2" pref="55" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="82" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" pref="55" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jPasswordField1" min="-2" pref="48" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="passwordText" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="55" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="msqLabel" pref="40" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="LoginButton" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace pref="231" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="55" max="-2" attributes="0"/>
+                          <EmptySpace pref="395" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JTextField" name="loginText">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Login PAnel mother fucker !!! "/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="1"/>
+                </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JPasswordField" name="passwordText">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="18" style="1"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="LoginButton">
@@ -114,6 +126,29 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="24" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Mot de passe"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="24" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="E-M@il"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="msqLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="24" style="1"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -127,30 +162,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="340" max="-2" attributes="0"/>
-                      <EmptySpace pref="190" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="96" max="-2" attributes="0"/>
-                      <EmptySpace pref="493" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Container yay"/>
-              </Properties>
-            </Component>
-          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

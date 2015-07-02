@@ -5,49 +5,28 @@
  */
 package Entite;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
 /**
  *
  * @author halloul
  */
-@Entity
-@Table(name = "user", catalog = "realestatedb", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
+
+public class User {
+    
     private Integer id;
-    @Column(name = "nom")
+
     private String nom;
-    @Column(name = "prenom")
+
     private String prenom;
-    @Column(name = "mail")
+
     private String mail;
-    @Column(name = "password")
+  
     private String password;
-    @Column(name = "adresse")
+   
     private String adresse;
-    @Column(name = "telephone")
+   
     private String telephone;
-    @JoinColumn(name = "type", referencedColumnName = "id")
-    @ManyToOne
-    private UserType userType;
+
+    private String userType;
 
     public User() {
     }
@@ -56,7 +35,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String nom, String prenom, String mail, String password, String adresse, String telephone, UserType userType) {
+    public User(Integer id, String nom, String prenom, String mail, String password, String adresse, String telephone,String userType) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -123,11 +102,11 @@ public class User implements Serializable {
         this.telephone = telephone;
     }
 
-    public UserType getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
