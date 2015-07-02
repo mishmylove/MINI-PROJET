@@ -39,7 +39,7 @@ public class UserService {
         }
     }
 
-    public int deleteUser(User u) {     
+    public int deleteUser(User u) {
         try {
             return uDAO.deleteUser(u);
         } catch (SQLException ex) {
@@ -57,6 +57,15 @@ public class UserService {
             return 0;
         }
 
+    }
+
+    public ArrayList<User> searchUser(String filter, String text)  {
+        try {
+            return uDAO.searchUser(filter, text);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
 }
