@@ -274,7 +274,7 @@ model.setRowCount(Us.size());
           for(int i = 0; i<Us.size();i++)
 {
        
-        
+       
         usersTab.setValueAt(Us.get(i).getId(), i, 0);
         usersTab.setValueAt(Us.get(i).getNom(), i, 1);
         usersTab.setValueAt(Us.get(i).getPrenom(), i, 2);
@@ -282,7 +282,6 @@ model.setRowCount(Us.size());
         usersTab.setValueAt(Us.get(i).getAdresse(), i, 4);
         usersTab.setValueAt(Us.get(i).getTelephone(), i, 5);
         usersTab.setValueAt(Us.get(i), i, 6);
-
 }
 
 

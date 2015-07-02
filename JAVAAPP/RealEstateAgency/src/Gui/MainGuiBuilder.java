@@ -4,11 +4,19 @@
  * and open the template in the editor.
  */
 package Gui;
+
 import BLL.UserService;
 import Entite.User;
+import static Gui.Dashboard.SelectedId;
+import static Gui.Dashboard.Us;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import Gui.GestUser;
+
 /**
  *
  * @author halloul
@@ -18,15 +26,16 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     /**
      * Creates new form MainGuiBuilder
      */
+    User appUser,updateUser;
+    public static String SelectedId = "-1";
 
-    User appUser;
     public MainGuiBuilder() {
         initComponents();
-     
-        
+
     }
-   UserService uService = new UserService();
-   
+    UserService uService = new UserService();
+
+    // table stuff
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +54,18 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         msqLabel = new javax.swing.JLabel();
         ContainerJpanel = new javax.swing.JPanel();
+        welcomeWagon = new javax.swing.JLabel();
+        tabPanel = new javax.swing.JPanel();
+        tabContainer = new javax.swing.JTabbedPane();
+        ConsultationOffres = new javax.swing.JPanel();
+        Statistiques = new javax.swing.JPanel();
+        NewsLetter = new javax.swing.JPanel();
+        GestionUtilisateurs = new javax.swing.JPanel();
+        UserTableScroll = new javax.swing.JScrollPane();
+        UserTable = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        MonCompte = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -79,7 +100,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginJpanelLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(LoginJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(msqLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(LoginJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -91,7 +112,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                 .addGroup(LoginJpanelLayout.createSequentialGroup()
                     .addGap(80, 80, 80)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(629, Short.MAX_VALUE)))
+                    .addContainerGap(634, Short.MAX_VALUE)))
         );
         LoginJpanelLayout.setVerticalGroup(
             LoginJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +124,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                     .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(msqLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addComponent(msqLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addGap(26, 26, 26)
                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(169, 169, 169))
@@ -111,20 +132,169 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                 .addGroup(LoginJpanelLayout.createSequentialGroup()
                     .addGap(150, 150, 150)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(395, Short.MAX_VALUE)))
+                    .addContainerGap(453, Short.MAX_VALUE)))
         );
 
         MainJpanel.add(LoginJpanel, "loginPanel");
+
+        welcomeWagon.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        welcomeWagon.setText("Bonjour lol");
+        welcomeWagon.setToolTipText("");
+
+        tabContainer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabContainerMouseClicked(evt);
+            }
+        });
+
+        ConsultationOffres.setPreferredSize(new java.awt.Dimension(800, 584));
+
+        javax.swing.GroupLayout ConsultationOffresLayout = new javax.swing.GroupLayout(ConsultationOffres);
+        ConsultationOffres.setLayout(ConsultationOffresLayout);
+        ConsultationOffresLayout.setHorizontalGroup(
+            ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        ConsultationOffresLayout.setVerticalGroup(
+            ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 584, Short.MAX_VALUE)
+        );
+
+        tabContainer.addTab("Consultation des offres", ConsultationOffres);
+
+        Statistiques.setPreferredSize(new java.awt.Dimension(800, 584));
+
+        javax.swing.GroupLayout StatistiquesLayout = new javax.swing.GroupLayout(Statistiques);
+        Statistiques.setLayout(StatistiquesLayout);
+        StatistiquesLayout.setHorizontalGroup(
+            StatistiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        StatistiquesLayout.setVerticalGroup(
+            StatistiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 584, Short.MAX_VALUE)
+        );
+
+        tabContainer.addTab("Statistiques", Statistiques);
+
+        NewsLetter.setName(""); // NOI18N
+        NewsLetter.setPreferredSize(new java.awt.Dimension(800, 584));
+
+        javax.swing.GroupLayout NewsLetterLayout = new javax.swing.GroupLayout(NewsLetter);
+        NewsLetter.setLayout(NewsLetterLayout);
+        NewsLetterLayout.setHorizontalGroup(
+            NewsLetterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        NewsLetterLayout.setVerticalGroup(
+            NewsLetterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 584, Short.MAX_VALUE)
+        );
+
+        tabContainer.addTab("Gestion NewsLetter", NewsLetter);
+
+        GestionUtilisateurs.setPreferredSize(new java.awt.Dimension(800, 584));
+
+        UserTableScroll.setEnabled(false);
+
+        UserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nom", "Prenom", "Mail", "Password", "Adresse", "Telephone", "Type"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        UserTable.setCellSelectionEnabled(true);
+        UserTable.setEditingColumn(1);
+        UserTable.setEditingRow(1);
+        UserTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UserTableMouseClicked(evt);
+            }
+        });
+        UserTableScroll.setViewportView(UserTable);
+
+        jTextField1.setText("jTextField1");
+
+        jButton1.setText("jButton1");
+
+        javax.swing.GroupLayout GestionUtilisateursLayout = new javax.swing.GroupLayout(GestionUtilisateurs);
+        GestionUtilisateurs.setLayout(GestionUtilisateursLayout);
+        GestionUtilisateursLayout.setHorizontalGroup(
+            GestionUtilisateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GestionUtilisateursLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
+            .addComponent(UserTableScroll)
+        );
+        GestionUtilisateursLayout.setVerticalGroup(
+            GestionUtilisateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GestionUtilisateursLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(GestionUtilisateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
+                .addGap(83, 83, 83)
+                .addComponent(UserTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+        );
+
+        tabContainer.addTab("Gestion Utilisateurs", GestionUtilisateurs);
+
+        MonCompte.setPreferredSize(new java.awt.Dimension(800, 584));
+
+        javax.swing.GroupLayout MonCompteLayout = new javax.swing.GroupLayout(MonCompte);
+        MonCompte.setLayout(MonCompteLayout);
+        MonCompteLayout.setHorizontalGroup(
+            MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        MonCompteLayout.setVerticalGroup(
+            MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 584, Short.MAX_VALUE)
+        );
+
+        tabContainer.addTab("Mon Compte", MonCompte);
+
+        javax.swing.GroupLayout tabPanelLayout = new javax.swing.GroupLayout(tabPanel);
+        tabPanel.setLayout(tabPanelLayout);
+        tabPanelLayout.setHorizontalGroup(
+            tabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabContainer)
+        );
+        tabPanelLayout.setVerticalGroup(
+            tabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabContainer)
+        );
 
         javax.swing.GroupLayout ContainerJpanelLayout = new javax.swing.GroupLayout(ContainerJpanel);
         ContainerJpanel.setLayout(ContainerJpanelLayout);
         ContainerJpanelLayout.setHorizontalGroup(
             ContainerJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(ContainerJpanelLayout.createSequentialGroup()
+                .addGap(287, 287, 287)
+                .addComponent(welcomeWagon, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ContainerJpanelLayout.setVerticalGroup(
             ContainerJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(ContainerJpanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(welcomeWagon, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         MainJpanel.add(ContainerJpanel, "containerPanel");
@@ -137,7 +307,9 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(MainJpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,41 +318,104 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
         //check empty login
-        if(loginText.getText().equals("")){
+        /*
+         if (loginText.getText().equals("")) {
+         loginText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+         msqLabel.setVisible(true);
+         msqLabel.setText("Merci de verifer les champs !");
+
+         } else {
+         loginText.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+         msqLabel.setVisible(false);
+         }
+         // check pass
+         if (passwordText.getText().equals("")) {
+         passwordText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+         msqLabel.setVisible(true);
+         msqLabel.setText("Merci de verifer les champs !");
+         return;
+         } else {
+         passwordText.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+         msqLabel.setVisible(false);
+         }*/
+
+        // go for login 
+        //appUser = uService.loginByMail(loginText.getText(), passwordText.getText());
+        appUser = uService.loginByMail("Admin@admin.com", "admin");
+        if (appUser != null) {
+            CardLayout card = (CardLayout) MainJpanel.getLayout();
+            card.show(MainJpanel, "containerPanel");
+            // 0 : offre 
+            // 1 : stats
+            // 2 : newletter 
+            // 3 : gestion user 
+            // 4  :mon compte 
+
+            tabContainer.setEnabledAt(0, true);
+            tabContainer.setEnabledAt(4, true);
+
+            if (appUser.getUserType().equals("Admin")) {
+                tabContainer.setEnabledAt(1, true);
+                tabContainer.setEnabledAt(2, true);
+                tabContainer.setEnabledAt(3, true);
+
+            } else if (appUser.getUserType().equals("User")) {
+                tabContainer.setEnabledAt(1, false);
+                tabContainer.setEnabledAt(2, false);
+                tabContainer.setEnabledAt(3, false);
+            }
+
+            welcomeWagon.setVisible(true);
+            welcomeWagon.setText("Bonjour " + appUser.getNom());
+        } else {
             loginText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-            msqLabel.setVisible(true);
-            msqLabel.setText("Merci de verifer les champs !");
-          
-        }else{
-            loginText.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-            msqLabel.setVisible(false);
-        }
-        // check pass
-         if(passwordText.getText().equals("")){
             passwordText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
             msqLabel.setVisible(true);
-            msqLabel.setText("Merci de verifer les champs !");
-            return;
-        }else{
-            passwordText.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-            msqLabel.setVisible(false);
-        }
-        
-        // go for login 
-         appUser =uService.loginByMail(loginText.getText(), passwordText.getText()); 
-        if(appUser!=null){
-        CardLayout card = (CardLayout)MainJpanel.getLayout();
-        card.show(MainJpanel, "containerPanel");
-        
-        //welcomeWagon.setVisible(true);
-        //welcomeWagon.setText("Bonjour "+appUser.getNom());
-        }else{
-        loginText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        passwordText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        msqLabel.setVisible(true);
-        msqLabel.setText("Authentification échouée !");
+            msqLabel.setText("Authentification échouée !");
         }
     }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void tabContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabContainerMouseClicked
+        // TODO add your handling code here:
+        
+         DefaultTableModel userTabelModel = (DefaultTableModel) UserTable.getModel();
+        
+        ArrayList<User> listUser = uService.getUserList();
+        //userTableModel.
+         userTabelModel.setRowCount(listUser.size());
+        for (int i = 0; i < listUser.size(); i++) {
+
+            UserTable.setValueAt(listUser.get(i).getId(), i, 0);
+            UserTable.setValueAt(listUser.get(i).getNom(), i, 1);
+            UserTable.setValueAt(listUser.get(i).getPrenom(), i, 2);
+            UserTable.setValueAt(listUser.get(i).getMail(), i, 3);
+            UserTable.setValueAt(listUser.get(i).getPassword(), i, 4);
+            UserTable.setValueAt(listUser.get(i).getAdresse(), i, 5);
+            UserTable.setValueAt(listUser.get(i).getTelephone(), i, 6);
+            UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
+        }
+
+
+    }//GEN-LAST:event_tabContainerMouseClicked
+
+    private void UserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserTableMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 1)
+
+   
+        updateUser = new User(
+         (int)UserTable.getValueAt(UserTable.getSelectedRow(), 0),    
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 1)),  
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 2)),  
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 3)),  
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 4)),  
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 5)),  
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 6)),  
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 7))  
+                
+        );
+        new GestUser(updateUser).setVisible(true);
+    }//GEN-LAST:event_UserTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -213,23 +448,33 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainGuiBuilder().setVisible(true);
-                
-      
-                
+
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ConsultationOffres;
     private javax.swing.JPanel ContainerJpanel;
+    private javax.swing.JPanel GestionUtilisateurs;
     private javax.swing.JButton LoginButton;
     private javax.swing.JPanel LoginJpanel;
     private javax.swing.JPanel MainJpanel;
+    private javax.swing.JPanel MonCompte;
+    private javax.swing.JPanel NewsLetter;
+    private javax.swing.JPanel Statistiques;
+    private javax.swing.JTable UserTable;
+    private javax.swing.JScrollPane UserTableScroll;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField loginText;
     private javax.swing.JLabel msqLabel;
     private javax.swing.JPasswordField passwordText;
+    private javax.swing.JTabbedPane tabContainer;
+    private javax.swing.JPanel tabPanel;
+    private javax.swing.JLabel welcomeWagon;
     // End of variables declaration//GEN-END:variables
 }
