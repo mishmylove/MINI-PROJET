@@ -1,219 +1,83 @@
-
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Real State Agency</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="  css/style.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="  js/jquery.min.js"></script>
-
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
-		<script src="js/modernizr.custom.js"></script>
-
-<!-- top scrolling -->
-<script type="text/javascript" src="  js/move-top.js"></script>
-<script type="text/javascript" src="  js/easing.js"></script>
-   <script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
-				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
-			});
-		});
-	</script>
-</head>
-<body>
-  <div class="header-top-site">
-	 <div class="wrap"> 
-		<div class="logo">
-			<a  href="index.html">TN MOB</a>
-	    </div>
-	 	</div>
-   </div>
-   <div class="recherche"><form><input type="text" placeholder="recherche dans le site ..." class="" ><input type="submit" class="serach"></form> </div>
-	<div id="socialcontact">
-        <a href="https://twitter.com" target="_blank" class="twitter"></a>
-        <a href="https://www.facebook.com" target="_blank" class="facebook"></a>
-        </div> 
-  		 <div class="Descrip">
-			<p>Tunisian Real State Agency </p>
-	    </div>
-<!--   *******************************Create a count ***********************************!-->
-<div class="md-modal md-effect-12" id="modal-12">
-			<div class="md-content">
-				 <div class="register_account">
-          	<div class="wrap">
-    	      <h4 class="title">Créer un compte</h4>
-    		   <form>
-    			 <div class="col_1_of_2 span_1_of_2">
-		   			 <div>
-		   			 	<input type="text"   placeholder="nom" required><input type="text"   placeholder="prenom" required></div>
-		    			<div><input type="Mail" placeholder="E-Mail" class="allinput" required></div>
-		    			<div><input type="password" placeholder="password" class="allinput"  required></div>
-		    			<div><input type="password" placeholder="Confirmer votre password" class="allinput" required></div>
-		    		<div><select id="country" name="Type de compte" class="frm-field required" required>
-		            <option value="null">Type de compte </option>         
-		            <option value="AX">vendeur</option>
-		            <option value="AF">Gérant</option>
-		            <option value="AF">Administrateur</option>
-		     	    </select> <input type="text" placeholder="Entreprise" ><input type="text" placeholder="Address"  required></div>	
-		          <div><input type="text" placeholder="Cité" ><input type="number" placeholder="Code postale " ></div>
-		          <div><input type="Tel" placeholder="Tel :(+216) 24 66 66 66"  class="allinput" required></div>
-		         </div>
-		         <button class="btn-count">créer un compte</button>
-		         <p class="terms"><a href="#">Terms &amp; Conditions</a>.</p>
-		         <div class="clear"></div>
-		    </form>
-    		  </div> 
-    	  					<button class="md-close">Close me!</button>
-        			</div>
-				</div>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>Real State Agency</title>
+		<meta name="description" content="Real State Agency" />
+		<meta name="keywords" content="Real State Agency, web design, mejri mohamed, halloul mohamed, hamdi saoud" />
+		<meta name="author" content="Esprit" />
+		<link rel="shortcut icon" href="#">
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/content.css" />
+		<!--[if IE]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<div class="container">
+			<!-- Top Navigation -->
+			<div class="site-top clearfix">
+				<span class="right"><a  href="register.html"><span>Inscription</span></a></span>
+				<span class="right"><a  href="connexion.html"><span>Connexion</span></a></span>
+				
+		<div class="logo-site"><h1><a href="index.html"> Logo </a> <h1></div>
 			</div>
-		</div>
-		<!--   *******************************login ***********************************!-->
-<div class="md-modal md-effect-12" id="modal-13">
-			<div class="md-content">
-				 <div class="register_account">
-          	<div class="wrap">
-    	      <h4 class="title">Login</h4>
-    		   <form>
-    			 <div class="col_1_of_2 span_1_of_2">
-		   			 <div>
-		    			<div><input type="Mail" placeholder="Login" class="allinput" required></div>
-		    			<div><input type="password" placeholder="password" class="allinput"  required></div>
-		         </div>
-		         <button class="btn-login">Login</button>
-		       <p class="terms"><a href="#">Mot de passe oublié ?</a></p>
-		         <div class="clear"></div>
-		    </form>
-    	  </div> 
-    	  					<button class="md-close">Close me!</button>
-        </div>
-				</div>
-			</div>
-		</div>
- <!-- *******************************  Header Tooooooop  ********************************************  !-->
-  <div class="header-top">
-	 <div class="wrap"> 
-	    <div class="cssmenu">
-		   <ul>
-			 <li class="active"><button class="md-trigger" data-modal="modal-13">Login</button></li> 
-			 <li><button class="md-trigger" data-modal="modal-12">Mon compte</button></li> 
- 				
-		   </ul>
-		</div>
-		<ul class="icon2 sub-icon2 profile_img">
-			<li><a class="active-icon c2" href="#"> </a>
-				<ul class="sub-icon2 list">
-					<li><h3><strong>Panier</strong></h3><a href=""></a></li>
-					<li><p>Votre panier est vide  <a href="">choisir un produit</a></p></li>
-				</ul>
-			</li>
-		</ul>
-		<div class="clear"></div>
- 	</div>
-   	</div>
-		<div class="md-overlay"></div><!-- the overlay element -->
- <!-- *******************************  slider  ********************************************  !-->
-      
+
+           <!-- <div class="header-top-site">
+	 				<div class="wrap"> 
+						<div class="logo">
+							<a  href="index.html">TN MOB</a>
+	   					 </div>
+	 					</div>
+ 					  </div> !-->
+		<header class="site-header">
 
 
-
-    <div style="min-height: 50px;">
-        <!-- Jssor Slider Begin -->
-        <!-- To move inline styles to css file/block, please specify a class name for each element. --> 
-        <!-- ================================================== -->
         <div id="slider1_container" style="display: none; position: relative; margin: 0 auto;
         top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
-      
-
+            <!-- Loading Screen -->
+            <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+                <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;
+                top: 0px; left: 0px; width: 100%; height: 100%;">
+                </div>
+                <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px; width: 100%; height: 100%;">
+                </div>
+            </div>
             <!-- Slides Container -->
             <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1300px; height: 500px; overflow: hidden;">
                 <div>
-                    <img u="image" src2="images/1920/bg_img1.jpg" />
+                
+                    <img u="image" src2="img/bg_img2.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="images/1920/bg_img2.jpg" />
+                    <img u="image" src2="img/bg_img1.jpg" />
                 </div>
                 <div>
-                    <img u="image" src2="images/1920/bg_img3.jpg" />
+                    <img u="image" src2="img/bg_img1.jpg" />
                 </div>
             </div>
-            
-
-            <style>
-   
-               
-                .jssorb21 {
-                    position: absolute;
-                }
-                .jssorb21 div, .jssorb21 div:hover, .jssorb21 .av {
-                    position: absolute;
-                    /* size of bullet elment */
-                    width: 19px;
-                    height: 19px;
-                    text-align: center;
-                    line-height: 19px;
-                    color: white;
-                    font-size: 12px;
-                    background: url(images/b21.png) no-repeat;
-                    overflow: hidden;
-                    cursor: pointer;
-                }
-                .jssorb21 div { background-position: -5px -5px; }
-                .jssorb21 div:hover, .jssorb21 .av:hover { background-position: -35px -5px; }
-                .jssorb21 .av { background-position: -65px -5px; }
-                .jssorb21 .dn, .jssorb21 .dn:hover { background-position: -95px -5px; }
-            </style>
+         
             <!-- bullet navigator container -->
             <div u="navigator" class="jssorb21" style="bottom: 26px; right: 6px;">
                 <!-- bullet navigator item prototype -->
                 <div u="prototype"></div>
             </div>
-       
-            <style>
-   
-                .jssora21l, .jssora21r {
-                    display: block;
-                    position: absolute;
-                    /* size of arrow element */
-                    width: 55px;
-                    height: 55px;
-                    cursor: pointer;
-                    background: url(images/a21.png) center center no-repeat;
-                    overflow: hidden;
-                }
-                .jssora21l { background-position: -3px -33px; }
-                .jssora21r { background-position: -63px -33px; }
-                .jssora21l:hover { background-position: -123px -33px; }
-                .jssora21r:hover { background-position: -183px -33px; }
-                .jssora21l.jssora21ldn { background-position: -243px -33px; }
-                .jssora21r.jssora21rdn { background-position: -303px -33px; }
-            </style>
             <!-- Arrow Left -->
             <span u="arrowleft" class="jssora21l" style="top: 123px; left: 8px;">
             </span>
             <!-- Arrow Right -->
             <span u="arrowright" class="jssora21r" style="top: 123px; right: 8px;">
             </span>
-            <!--#endregion Arrow Navigator Skin End -->
-            <a style="display: none" href="http://www.jssor.com">Bootstrap Slider</a>
         </div>
         <!-- Jssor Slider End -->
-    </div>
-
-
-
-
-
-
-
- <!--   Recherche   !-->
-   <div class="header-bottom">
-   	<div class="wrap">
-   		<!-- start header menu -->
-			 <div class=" searchForm">
+			</header>
+</div><div class="cntnt">
+			<div class="search">   
 		   			 	<form action="#" >
 		   			 	<div><input type="text"  class="searchProd"  placeholder=" Location, Pays, Gouvernorat ..." ></div>
 		    			<div><select id="Rubrique"   name="Rubrique"  class="select-search required">
@@ -236,136 +100,137 @@
 			            <option value="Of">Offre</option>
 		                </select>	
 		            </div>		  
-		            <div ></div><div > <input type="submit" value="Rechercher"  class="btn-search"></input></div>      
-		    			</form>
-		    	 </div>
-		  <div class="clear"></div>
-     	
-     	</div>
-      </div>
-      
-			</div>
-			</div>
-
-
-<!-- ************************************content*************************************** !-->
-
-	<div class="container">
-			<!-- Top Navigation -->
-			<ul class="grid effect-1" id="grid">
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/12.png"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/13.png"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/10.png"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/11.png"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/2.jpg"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/14.png"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/1.jpg"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/3.jpg"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/4.jpg"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/5.jpg"><a href="#" class="suite">Lire la suite</a></div></li>
-				<li><div class="comp"><h4>nom de produit </h4><img src="images/6.jpg"><a href="#" class="suite">Lire la suite</a></div></li>
-	            <li><div class="comp"><h4>nom de produit </h4><img src="images/5.jpg"><a href="#" class="suite">Lire la suite</a></div></li>
-			</ul>
-		</div>
-		<script src="js/masonry.pkgd.min.js"></script>
-		<script src="js/imagesloaded.js"></script>
-		<script src="js/classie.js"></script>
-		<script src="js/AnimOnScroll.js"></script>
-		<script>
-			new AnimOnScroll( document.getElementById( 'grid' ), {
-				minDuration : 0.4,
-				maxDuration : 0.7,
-				viewportFactor : 0.2
-			} );
-		</script>
-<!-- *************************************** mini slider Nos partenaires *******************!-->
-        <!-- footer !-->
-        <div class="footer">
-       	 <div class="footer-bottom">
-       	 	<div class="wrap">
-       	 		<div class="section group">
-       	 	<div class="" style="width: 79%;">
-				<div class="col_1_of_5 span_1_of_5">
-					<h3 class="m_9">Immobiliere</h3>
-					<ul class="list1">
-			            <li><a href="#">Demande</a></li>
-			            <li><a href="#">Offres</a></li>
-			        </ul>
+		            <div></div>
+		            <div> <input type="submit" value="Rechercher"  class="btn-search"></input></div>      
+		    		</form>
+		    	</div>
+			<div class="content">
+				<h2>Découvrez nos offres ; Achat , Vente ... </h2>
+				<div class="grid">
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+												<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+						<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Dreamy <span>Honey</span> <i>Now</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+						<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="#">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+				
 				</div>
-				<div class="col_1_of_5 span_1_of_5">
-					<h3 class="m_9">Location</h3>
-					<ul class="list1">
+			</div>
+
+		<div class="discover">
+		 <a href="#" class="shop-btn">Decouvrir nos annonces </a>
+		</div>
+		
+</div>
+     <!-- footer !-->
+        <div class="footer">
+       		<div style="  display: inline-block;   margin-right: 6%;">
+					<h3 >Location</h3>
+					<ul >
 						<li><a href="#">Location</a></li>
 					    <li><a href="#">Vente</a></li>
 			            <li><a href="#">Location Vacances</a></li>
 			            <li><a href="#">Bureaux & Commerces</a></li>
 		            </ul>
 				</div>
-				<div class="col_1_of_5 span_1_of_5">
-					<h3 class="m_9">Ruberique</h3>
-					<ul class="list1">
-					   <li><a href="index.html">Acceuil</a></li>
-					   <li><a href="#">Nos Services</a></li>
-					   <li><a href="#">FAQ</a></li>
+				  <div style="  display: inline-block;   margin-right: 6%;">
+					<h3 >Location</h3>
+					<ul >
+						<li><a href="#">Location</a></li>
+					    <li><a href="#">Vente</a></li>
+			            <li><a href="#">Location Vacances</a></li>
+			            <li><a href="#">Bureaux & Commerces</a></li>
 		            </ul>
 				</div>
-	        </div>				
-	        <div>
-	        	<div class="logo-footer"><div class="logo-f">
-			     <a href="index.html">TN MOB</a>
-			     
-	            </div>
-	        <div class="aboutp">
-	         <p>
-               Agence immobilére Tunisienne
-			 </p>
-			 <div id="socialcontactfooter">
-       			 <a href="https://twitter.com" target="_blank" class="twitter"></a>
-        			<a href="https://www.facebook.com" target="_blank" class="facebook"></a>
-        	</div> 
-			 </div></div>
-                 </div>
-				<div class="clear"></div>
-			</div>  
-       	 	</div>
-       	 </div>
+				
+  <div style="  display: inline-block;   margin-right: 6%;">
+					<h3 >Location</h3>
+					<ul >
+						<li><a href="#">Location</a></li>
+					    <li><a href="#">Vente</a></li>
+			            <li><a href="#">Location Vacances</a></li>
+			            <li><a href="#">Bureaux & Commerces</a></li>
+		            </ul>
+				</div>
        </div>
 		<div class="copy">
        	   <div class="wrap">
        	   	  <p>© All rights reserved | by EspritGroupe6</p>
        	   </div>
        	 </div>
-       <script type="text/javascript">
-			$(document).ready(function() {
-			
-				var defaults = {
-		  			containerID: 'toTop', // fading element id
-					
-					scrollSpeed: 1200,
-					easingType: 'linear' 
-		 		};
-				$().UItoTop({ easingType: 'easeOutQuart' });
-			});
+
+
+
+		<script>
+			// For Demo purposes only (show hover effect on mobile devices)
+			[].slice.call( document.querySelectorAll('a[href="#"') ).forEach( function(el) {
+				el.addEventListener( 'click', function(ev) { ev.preventDefault(); } );
+			} );
 		</script>
-		<script src="js/classie.js"></script>
-		<script src="js/modalEffects.js"></script>
-        <a href="#" id="toTop" style="display: block; color: #fff"> top </a>
-
-
-      
-
-
-
-
-         <!-- Bootstrap core JavaScript
-    ================================================== -->
+    <!--  ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <script src="docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="ie10-viewport-bug-workaround.js"></script>
-
     <!-- jssor slider scripts-->
     <!-- use jssor.js + jssor.slider.js instead for development -->
     <!-- jssor.slider.mini.js = (jssor.js + jssor.slider.js) -->
@@ -433,5 +298,5 @@
             //responsive code end
         });
     </script>
-</body>
+	</body>
 </html>
