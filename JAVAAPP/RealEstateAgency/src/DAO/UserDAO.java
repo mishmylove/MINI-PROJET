@@ -23,7 +23,7 @@ public class UserDAO {
     static Connection con = DBcon.getInstance();
     static Statement ste;
     String insertQuery = " insert into user (nom, prenom, age)" + " values (?, ?, ?)";
-    String updateQuery = " insert into user (nom, prenom, age)" + " values (?, ?, ?)";
+    String updateQuery = " UPDATE `user` SET `nom`= ?,`prenom`= ?,`mail`= ?,`password`= ?,`adresse`= ?,`telephone`= ?,`type`= ? WHERE id = ?";
     String deleteQuery = " DELETE FROM `user` WHERE id = ?";
     
     String selectAllQuery = "select * from  user ;";
@@ -88,6 +88,25 @@ public class UserDAO {
         return psDelete.executeUpdate();
         
     }  
+    /**
+     * updateUser
+     * @param u
+     * @return 
+     * @throws SQLException 
+     */
+    public int updateUser(User u) throws SQLException {
+        psUpdate = con.prepareStatement(updateQuery);
+        psUpdate.setString(1, String.valueOf(u.getNom()));
+        psUpdate.setString(2, String.valueOf(u.getPrenom()));
+        psUpdate.setString(3, String.valueOf(u.getMail()));
+        psUpdate.setString(4, String.valueOf(u.getPassword()));
+        psUpdate.setString(5, String.valueOf(u.getAdresse()));
+        psUpdate.setString(6, String.valueOf(u.getTelephone()));
+        psUpdate.setString(7, String.valueOf(u.getUserType()));
+        psUpdate.setString(8, String.valueOf(u.getId())); 
+        return psUpdate.executeUpdate();
+    }
+
 
     public int AddUser(User u) throws SQLException {
 

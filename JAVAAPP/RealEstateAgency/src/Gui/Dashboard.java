@@ -222,7 +222,7 @@ public class Dashboard extends javax.swing.JFrame {
         if(evt.getClickCount() == 1)
 
             SelectedId  = String.valueOf(usersTab.getValueAt(usersTab.getSelectedRow(), 0));
-        new GestUser().setVisible(true);
+    //    new GestUser().setVisible(true);
         
     }//GEN-LAST:event_usersTabMouseClicked
 

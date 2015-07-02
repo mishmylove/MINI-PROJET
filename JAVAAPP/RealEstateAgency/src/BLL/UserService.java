@@ -18,40 +18,45 @@ import java.util.logging.Logger;
  */
 public class UserService {
 
-    
-        UserDAO uDAO = new UserDAO();
-    
+    UserDAO uDAO = new UserDAO();
 
     public ArrayList<User> getUserList() {
-            try {
-                return uDAO.getUserList();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-            }
+        try {
+            return uDAO.getUserList();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
-     public User loginByMail(String mail,String password){
-     
-            try {
-                return uDAO.loginByMail(mail, password);
-            } catch (SQLException ex) {
-                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
-            }
-     }
-     
-     
-      public int deleteUser(User u){
-     
-            try {
-                return uDAO.deleteUser(u);
-            } catch (SQLException ex) {
-                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
-                return 0;
-            }
-     }
-     
-     
-     
+    public User loginByMail(String mail, String password) {
+
+        try {
+            return uDAO.loginByMail(mail, password);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public int deleteUser(User u) {     
+        try {
+            return uDAO.deleteUser(u);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
+    public int updateUser(User u) {
+
+        try {
+            return uDAO.updateUser(u);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+
+    }
+
 }
