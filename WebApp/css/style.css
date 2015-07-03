@@ -106,36 +106,13 @@ section {
 
 
 
-/* Demo links */
-.site-demos {
-	clear: both;
-	padding: 1em 0 0;
-	text-align: center;
-}
-
-.content + .site-demos {
-	padding-top: 5em;
-}
-
-.site-demos a {
-	display: inline-block;
-	margin: 0 5px;
-	padding: 1em 1.5em;
-	text-transform: uppercase;
-	font-weight: bold;
-}
-
-.site-demos a:hover,
-.site-demos a:focus,
-.site-demos a.current-demo {
-	background: #3c414a;
-	color: #fff;
-}
 
 /* To Navigation Style */
 .site-top {
   width: 100%;
   text-transform: uppercase;
+    border-bottom: 2px solid #FF5402;
+  border-top: none;
   /* box-shadow: 1px 2px 3px 4px #000; */
   background: rgba(11, 11, 11, 1);}
 
@@ -170,6 +147,8 @@ color: #343836;
 /* connexion top */
 .site-top-register {
  width: 100%;
+    border-bottom: 2px solid #FF5402;
+  border-top: none;
   text-transform: uppercase;
   /* box-shadow: 1px 2px 3px 4px #000; */
   background: rgba(22, 22, 22, 1);
@@ -295,7 +274,7 @@ label {
   background: rgba(0, 0, 0, 0.95);
   position: relative;
   /* top: -21px; */
-  padding: 24px;
+  padding: 51px;
   margin-bottom: 2%;
   /* left: 28%; */
 }

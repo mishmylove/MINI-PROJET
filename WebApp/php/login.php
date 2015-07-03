@@ -14,7 +14,7 @@ $resultat1 = mysql_fetch_array($resultat);
 
 if ($resultat1['mail']!="") {
 	    echo 'profile';
-	
+	 header('Location: ../vendeur.html');
 }
 else {
   	echo 'login ou mot de passse incorrecte ...';
