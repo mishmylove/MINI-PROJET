@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +29,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Rubrique.findAll", query = "SELECT r FROM Rubrique r")})
 public class Rubrique implements Serializable {
+    @OneToMany(mappedBy = "idRubrique")
+    private Collection<Nature> natureCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,6 +96,15 @@ public class Rubrique implements Serializable {
     @Override
     public String toString() {
         return "Entite.Rubrique[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Nature> getNatureCollection() {
+        return natureCollection;
+    }
+
+    public void setNatureCollection(Collection<Nature> natureCollection) {
+        this.natureCollection = natureCollection;
     }
     
 }

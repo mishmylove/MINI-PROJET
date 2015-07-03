@@ -6,27 +6,30 @@
 package Entite;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author halloul
  */
 @Entity
-@Table(name = "type", catalog = "realestatedb", schema = "")
+@Table(name = "type")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Type.findAll", query = "SELECT t FROM Type t")})
+    @NamedQuery(name = "Type.findAll", query = "SELECT t FROM Type t"),
+    @NamedQuery(name = "Type.findById", query = "SELECT t FROM Type t WHERE t.id = :id"),
+    @NamedQuery(name = "Type.findByNom", query = "SELECT t FROM Type t WHERE t.nom = :nom")})
 public class Type implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,8 +39,9 @@ public class Type implements Serializable {
     private Integer id;
     @Column(name = "nom")
     private String nom;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "type")
-    private Collection<Post> postCollection;
+    @JoinColumn(name = "id_nature", referencedColumnName = "id")
+    @ManyToOne
+    private Nature idNature;
 
     public Type() {
     }
@@ -62,12 +66,12 @@ public class Type implements Serializable {
         this.nom = nom;
     }
 
-    public Collection<Post> getPostCollection() {
-        return postCollection;
+    public Nature getIdNature() {
+        return idNature;
     }
 
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
+    public void setIdNature(Nature idNature) {
+        this.idNature = idNature;
     }
 
     @Override

@@ -3,15 +3,15 @@
  * and open the template in the editor.
  */
 
-package Gui;
+package Entite;
 
 /**
  *
  * @author DELL
  */
 public class top {
-    int nb;
-    String element;
+    public int nb;
+    public String element;
    
 
     public top(int nbg, String gov) {

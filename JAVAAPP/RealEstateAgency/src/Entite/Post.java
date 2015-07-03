@@ -22,36 +22,30 @@ import javax.persistence.Table;
  *
  * @author halloul
  */
-@Entity
-@Table(name = "post", catalog = "realestatedb", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")})
-public class Post implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
+
+public class Post {
+  
+     
     private Integer id;
-    @Column(name = "titre")
+     
     private String titre;
-    @Column(name = "text")
+     
     private String text;
-    @Column(name = "dateCreation")
+  
     private String dateCreation;
-    @Column(name = "prix")
+   
     private String prix;
-    @JoinColumn(name = "gouvernorat", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+  
+    
     private Gouvernorat gouvernorat;
-    @JoinColumn(name = "nature", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+  
+   
     private Nature nature;
-    @JoinColumn(name = "rubrique", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+  
+  
     private Rubrique rubrique;
-    @JoinColumn(name = "type", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+ 
+    
     private Type type;
 
     public Post() {
