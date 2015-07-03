@@ -7,8 +7,10 @@ package Gui;
 
 import BLL.UserService;
 import BLL.statsService;
+import BLL.postService;
 import Entite.User;
 import Entite.top;
+import Entite.Post;
 import static Gui.Dashboard.SelectedId;
 import static Gui.Dashboard.Us;
 import java.awt.CardLayout;
@@ -36,6 +38,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     User appUser,updateUser;
     public static String SelectedId = "-1";
     public static ArrayList<User>  listUser;
+    public static ArrayList<Post>  listPost;
     DefaultPieDataset dataset;//Dataset qui va contenir les Données
     JFreeChart graphe;        //Graphe
     ChartPanel piePanel;            //Panel
@@ -47,6 +50,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     }
     public static UserService uService = new UserService();
     public static statsService sService = new statsService();
+    public static postService pService = new postService();
 
     // table stuff
     /**
@@ -218,9 +222,16 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         PostTable.setCellSelectionEnabled(true);
@@ -276,11 +287,10 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                         .addComponent(addPostBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21))
                     .addGroup(ConsultationOffresLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FilterGouvernorat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addGap(20, 20, 20)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FiltreRubrique, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,15 +302,14 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FilterType, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(ConsultationOffresLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addComponent(filterPrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(msgPrix, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ConsultationOffresLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(filterPrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(msgPrix, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PostTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
         );
@@ -616,7 +625,9 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         // TODO add your handling code here:
         // dude to stupid java we have to do this : 
         // consultation des offre 
-        if(tabContainer.getSelectedIndex()==0){}
+        if(tabContainer.getSelectedIndex()==0){
+        PostTableUpdate();
+        }
         // stats
         else if (tabContainer.getSelectedIndex()==1){
             top5List = sService.getTop5Gouvernorat();
@@ -731,6 +742,28 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
         }
     }
+    
+      public static void PostTableUpdate(){
+    
+    
+     DefaultTableModel postTabelModel = (DefaultTableModel) PostTable.getModel();
+        
+         listPost = pService.getPostList();
+        
+         postTabelModel.setRowCount(listPost.size());
+        for (int i = 0; i < listPost.size(); i++) {
+
+            PostTable.setValueAt(listPost.get(i).getId(), i, 0);
+            PostTable.setValueAt(listPost.get(i).getTitre(), i, 1);
+            PostTable.setValueAt(listPost.get(i).getText(), i, 2);
+            PostTable.setValueAt(listPost.get(i).getDateCreation(), i, 3);
+            PostTable.setValueAt(listPost.get(i).getGouvernorat(), i, 4);
+            PostTable.setValueAt(listPost.get(i).getRubrique(), i, 5);
+            PostTable.setValueAt(listPost.get(i).getNature(), i, 6);
+            PostTable.setValueAt(listPost.get(i).getType(), i, 7);
+            PostTable.setValueAt(listPost.get(i).getPrix(), i, 8);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -762,6 +795,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainGuiBuilder().setVisible(true);
+                PostTableUpdate();
 
             }
         });
