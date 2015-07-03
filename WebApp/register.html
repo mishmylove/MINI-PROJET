@@ -20,12 +20,10 @@
 	<body>
 		<div class="container">
 			<!-- Top Navigation -->
-			<div class="site-top-register clearfix">
-				<span class="right"><a  href="connexion.html"><span>Connexion</span></a></span>
-				
-<div class="logo-site-register"><a href="index.html"> Logo </a></div>
-			</div>
-
+			 <div class="site-top-register clearfix">
+			 <span class="right"><a  href="connexion.html"><span>Connexion</span></a></span>
+			 <div class="logo-site-register"><a href="index.html"> Logo </a></div>
+			 </div>
            <!-- <div class="header-top-site">
 	 				<div class="wrap"> 
 						<div class="logo">
@@ -35,41 +33,37 @@
  					  </div> !-->
 		    <header class="site-header">
 			</header>
-			
 			<div class="search">   
-		            <div> <a href=""   class="btn-search">Decouvrir nos annonces</a></div>      
-		    	</div>
+		    <div> <a href="" class="btn-search">Decouvrir nos annonces</a></div>      
+		    </div>
 
 			<div class="content">
-				<div class="grid">
-					<h2>Créer un compte</h2>
+			<div class="grid">
+			   <h2>Créer un compte</h2>
 					 <div class="register_account">
-    		   <form>
+    		     <form  method="POST" action="php/register.php">
     			 <div>
-		   			<div><input type="text"  class="input-form"  placeholder="nom" required></div>
-		   			<div><input type="text"   placeholder="prenom"  class="input-form"  required></div>
-		    		<div><input type="Mail" placeholder="E-Mail" class="input-form"  required></div>
-		    		<div><input type="password" placeholder="password" class="input-form"    required></div>
-		    		<div><select id="country" name="Type de compte" class="input-form"   required>
+		   			<div><input type="text"  class="input-form" name="nom" placeholder="nom" required></div>
+		   			<div><input type="text"   placeholder="prenom" name="prenom" class="input-form"  required></div>
+		    		<div><input type="Mail" placeholder="E-Mail" name="mail" class="input-form"  required></div>
+		    		<div><input type="password" placeholder="password" name="pass" class="input-form"    required></div>
+		    		<div><select id="country" name="Tcompte"  class="input-form"   required>
 		            <option value="null">Type de compte </option>         
-		            <option value="AX">vendeur</option>
-		            <option value="AF">Gérant</option>
-		            <option value="AF">Administrateur</option>
+		            <option value="vendeur">vendeur</option>
+		            <option value="Admin">Administrateur</option>
 		     	    </select> </div>
-		     	    <div><input type="text" placeholder="Entreprise" class="input-form"  ></div>	
-		     	    <div><input type="text" placeholder="Address"  class="input-form"   required></div>
-		         
-		            <div><input type="Tel" placeholder="Tel :(+216) 24 66 66 66"  class="input-form"  required></div>
+		     	    <div><input type="text" placeholder="Address" name="adresse" class="input-form"   required></div>
+		            <div><input type="Tel" placeholder="Tel :(+216) 24 66 66 66" name="tel" class="input-form"  required></div>
 		         </div>
-		         <button class="btn-count">créer un compte</button>
+		         <button class="btn-count" type="submit" name="submit">créer un compte</button>
 		         <p class="terms"><a href="#">Terms &amp; Conditions</a>.</p>
 		         <div class="clear"></div>
 		         </form>
-    		      </div>
+    		     </div>
 				</div>
 			</div>
-</div>
-			<div class="cntnt">
+        </div>
+		<div class="cntnt">
 		</div>
      <!-- footer !-->
         <div class="footer">
@@ -100,7 +94,6 @@
 			            <li><a href="#">Bureaux & Commerces</a></li>
 		            </ul>
 				</div>
-				
        </div>
 		<div class="copy">
        	   <div class="wrap">
@@ -113,6 +106,5 @@
 				el.addEventListener( 'click', function(ev) { ev.preventDefault(); } );
 			} );
 		</script>
-  
 	</body>
 </html>

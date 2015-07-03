@@ -33,12 +33,12 @@
 					<h2>Connexion</h2>
 			
 			<div class="register_account">
-    		    <form>
+    		    <form method="POST" action="php/login.php" >
     			 <div>
-		   			<div><input type="text"  class="input-form"  placeholder="Login" required></div>
-		   			<div><input type="password"   placeholder="Mot de passe "  class="input-form"  required></div>
+		   			<div><input type="text"  class="input-form" name="login" placeholder="Login (Mail)" required></div>
+		   			<div><input type="password"   placeholder="Mot de passe " name="pass" class="input-form"  required></div>
 		    		
-		         <button class="btn-count">connexion</button>
+		         <button class="btn-count" type="submit">connexion</button>
 		         <p class="terms"><a href="#">Mot de passe oubliée </a>.</p>
 		         <div class="clear"></div>
 
