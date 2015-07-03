@@ -5,7 +5,6 @@
     $nom    = $_POST["nom"] ;
     $prenom = $_POST["prenom"] ;
     $mail   = $_POST["mail"] ;
-    echo $mail;
     $pass   = hash( 'sha512',$_POST["pass"]) ;
     $Tcompte= $_POST["Tcompte"] ;
     $adresse= $_POST["adresse"] ;
