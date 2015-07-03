@@ -64,9 +64,9 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         GestionUtilisateurs = new javax.swing.JPanel();
         UserTableScroll = new javax.swing.JScrollPane();
         UserTable = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        searchUser = new javax.swing.JTextField();
         addUserButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        filterUser = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         MonCompte = new javax.swing.JPanel();
 
@@ -226,11 +226,21 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         });
         UserTableScroll.setViewportView(UserTable);
 
-        jTextField1.setText("jTextField1");
+        searchUser.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        searchUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchUserKeyReleased(evt);
+            }
+        });
 
         addUserButton.setText("Ajouter Utilisateur");
+        addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addUserButtonMouseClicked(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        filterUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nom", "prenom", "mail", "adresse", "telephone", "type" }));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Recherche utilisateur");
@@ -244,9 +254,9 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(filterUser, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(224, 224, 224))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GestionUtilisateursLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,8 +268,8 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             .addGroup(GestionUtilisateursLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(GestionUtilisateursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterUser)
+                    .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,17 +404,12 @@ public class MainGuiBuilder extends javax.swing.JFrame {
 
     private void tabContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabContainerMouseClicked
         // TODO add your handling code here:
-        
         UserTableUpdate();
-
-
     }//GEN-LAST:event_tabContainerMouseClicked
 
     private void UserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserTableMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount() == 1)
-
-   
         updateUser = new User(
          (int)UserTable.getValueAt(UserTable.getSelectedRow(), 0),    
         String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 1)),  
@@ -413,11 +418,38 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 4)),  
         String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 5)),  
         String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 6)),  
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 7))  
-                
+        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 7))             
         );
         new GestUser(updateUser).setVisible(true);
     }//GEN-LAST:event_UserTableMouseClicked
+
+    private void searchUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUserKeyReleased
+        // TODO add your handling code here:
+        // getting filter selection first ! 
+        String filter=(String) filterUser.getSelectedItem();
+        String text = searchUser.getText();
+        DefaultTableModel userTabelModel = (DefaultTableModel) UserTable.getModel();
+        
+         listUser = uService.searchUser(filter, text);
+        //userTableModel.
+         userTabelModel.setRowCount(listUser.size());
+        for (int i = 0; i < listUser.size(); i++) {
+
+            UserTable.setValueAt(listUser.get(i).getId(), i, 0);
+            UserTable.setValueAt(listUser.get(i).getNom(), i, 1);
+            UserTable.setValueAt(listUser.get(i).getPrenom(), i, 2);
+            UserTable.setValueAt(listUser.get(i).getMail(), i, 3);
+            UserTable.setValueAt(listUser.get(i).getPassword(), i, 4);
+            UserTable.setValueAt(listUser.get(i).getAdresse(), i, 5);
+            UserTable.setValueAt(listUser.get(i).getTelephone(), i, 6);
+            UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
+        }
+    }//GEN-LAST:event_searchUserKeyReleased
+
+    private void addUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserButtonMouseClicked
+        // TODO add your handling code here:
+         new addUser().setVisible(true);
+    }//GEN-LAST:event_addUserButtonMouseClicked
 
     
     public static void UserTableUpdate(){
@@ -490,14 +522,14 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     public static javax.swing.JTable UserTable;
     javax.swing.JScrollPane UserTableScroll;
     private javax.swing.JButton addUserButton;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox filterUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField loginText;
     private javax.swing.JLabel msqLabel;
     private javax.swing.JPasswordField passwordText;
+    private javax.swing.JTextField searchUser;
     private javax.swing.JTabbedPane tabContainer;
     private javax.swing.JPanel tabPanel;
     private javax.swing.JLabel welcomeWagon;
