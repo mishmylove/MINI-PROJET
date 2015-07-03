@@ -6,7 +6,11 @@
 package Gui;
 
 import BLL.UserService;
+import BLL.statsService;
+import BLL.postService;
 import Entite.User;
+import Entite.top;
+import Entite.Post;
 import static Gui.Dashboard.SelectedId;
 import static Gui.Dashboard.Us;
 import java.awt.CardLayout;
@@ -16,6 +20,11 @@ import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import Gui.GestUser;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -29,12 +38,19 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     User appUser,updateUser;
     public static String SelectedId = "-1";
     public static ArrayList<User>  listUser;
+    public static ArrayList<Post>  listPost;
+    DefaultPieDataset dataset;//Dataset qui va contenir les Données
+    JFreeChart graphe;        //Graphe
+    ChartPanel piePanel;            //Panel
+    ArrayList<top> top5List;
 
     public MainGuiBuilder() {
         initComponents();
 
     }
     public static UserService uService = new UserService();
+    public static statsService sService = new statsService();
+    public static postService pService = new postService();
 
     // table stuff
     /**
@@ -59,6 +75,22 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         tabPanel = new javax.swing.JPanel();
         tabContainer = new javax.swing.JTabbedPane();
         ConsultationOffres = new javax.swing.JPanel();
+        searchUser1 = new javax.swing.JTextField();
+        addPostBtn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        msgPrix = new javax.swing.JLabel();
+        FilterGouvernorat = new javax.swing.JComboBox();
+        PostTableScroll = new javax.swing.JScrollPane();
+        PostTable = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        FiltreRubrique = new javax.swing.JComboBox();
+        FilterNature = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        FilterType = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        filterPrix = new javax.swing.JSlider();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         Statistiques = new javax.swing.JPanel();
         NewsLetter = new javax.swing.JPanel();
         GestionUtilisateurs = new javax.swing.JPanel();
@@ -69,9 +101,12 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         filterUser = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         MonCompte = new javax.swing.JPanel();
+        msgMonCompte = new javax.swing.JLabel();
+        MonCompteNewPass = new javax.swing.JPasswordField();
+        NewPasswordBtn = new javax.swing.JButton();
+        LogoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         MainJpanel.setLayout(new java.awt.CardLayout());
 
@@ -127,7 +162,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                     .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(msqLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addComponent(msqLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addGap(26, 26, 26)
                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(169, 169, 169))
@@ -135,7 +170,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                 .addGroup(LoginJpanelLayout.createSequentialGroup()
                     .addGap(150, 150, 150)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(453, Short.MAX_VALUE)))
+                    .addContainerGap(458, Short.MAX_VALUE)))
         );
 
         MainJpanel.add(LoginJpanel, "loginPanel");
@@ -152,15 +187,161 @@ public class MainGuiBuilder extends javax.swing.JFrame {
 
         ConsultationOffres.setPreferredSize(new java.awt.Dimension(800, 584));
 
+        searchUser1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        searchUser1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchUser1KeyReleased(evt);
+            }
+        });
+
+        addPostBtn.setText("Ajouter offre/demande");
+        addPostBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addPostBtnMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setText("Recherche Offre/demande :");
+
+        msgPrix.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        msgPrix.setText("1000000 DT");
+
+        FilterGouvernorat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Ariana", "Béja", "Ben Arous", "Bizerte", "Gabès", "Gafsa", "Jendouba", "Kairouan", "Kasserine", "Kébili", "La Manouba", "Le Kef", "Mahdia", "Médenine", "Monastir", "Nabeul", "Sfax", "Sidi Bouzi", "Siliana", "Sousse", "Tataouine", "Tozeur", "Tunis", "Zaghouan" }));
+
+        PostTableScroll.setEnabled(false);
+
+        PostTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Titre", "Text", "Date Creation", "Gouvernorat", "Rubrique", "Nature", "Type", "Prix"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        PostTable.setCellSelectionEnabled(true);
+        PostTable.setEditingColumn(1);
+        PostTable.setEditingRow(1);
+        PostTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostTableMouseClicked(evt);
+            }
+        });
+        PostTableScroll.setViewportView(PostTable);
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setText("Rubrique : ");
+
+        FiltreRubrique.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Offres", "Demandes" }));
+
+        FilterNature.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Achat", "Location", "Terrain", "Vente" }));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel7.setText("Nature :");
+
+        FilterType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Appartement", "Duplex", "Maison", "Terrain agricole", "Terrain nu" }));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel8.setText("Type :");
+
+        filterPrix.setValue(100);
+        filterPrix.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                filterPrixStateChanged(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel9.setText("Gouvernorat :");
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setText("Prix :");
+
         javax.swing.GroupLayout ConsultationOffresLayout = new javax.swing.GroupLayout(ConsultationOffres);
         ConsultationOffres.setLayout(ConsultationOffresLayout);
         ConsultationOffresLayout.setHorizontalGroup(
             ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(ConsultationOffresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ConsultationOffresLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(226, 226, 226)
+                        .addComponent(addPostBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(ConsultationOffresLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FilterGouvernorat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FiltreRubrique, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FilterNature, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FilterType, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ConsultationOffresLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(filterPrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(msgPrix, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PostTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
         );
         ConsultationOffresLayout.setVerticalGroup(
             ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+            .addGroup(ConsultationOffresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchUser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addPostBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FilterGouvernorat)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FiltreRubrique)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FilterNature)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FilterType)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(msgPrix, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(filterPrix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                .addGap(450, 450, 450))
+            .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ConsultationOffresLayout.createSequentialGroup()
+                    .addGap(147, 147, 147)
+                    .addComponent(PostTableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(78, Short.MAX_VALUE)))
         );
 
         tabContainer.addTab("Consultation des offres", ConsultationOffres);
@@ -175,7 +356,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         );
         StatistiquesLayout.setVerticalGroup(
             StatistiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
         tabContainer.addTab("Statistiques", Statistiques);
@@ -191,7 +372,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         );
         NewsLetterLayout.setVerticalGroup(
             NewsLetterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
         tabContainer.addTab("Gestion NewsLetter", NewsLetter);
@@ -211,9 +392,16 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         UserTable.setCellSelectionEnabled(true);
@@ -274,22 +462,53 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(addUserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(UserTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
+                .addComponent(UserTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
         );
 
         tabContainer.addTab("Gestion Utilisateurs", GestionUtilisateurs);
 
         MonCompte.setPreferredSize(new java.awt.Dimension(800, 584));
 
+        msgMonCompte.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        msgMonCompte.setText("Changement mot de passe");
+
+        MonCompteNewPass.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        NewPasswordBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        NewPasswordBtn.setText("Valider");
+
+        LogoutBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        LogoutBtn.setText("Déconnexion");
+
         javax.swing.GroupLayout MonCompteLayout = new javax.swing.GroupLayout(MonCompte);
         MonCompte.setLayout(MonCompteLayout);
         MonCompteLayout.setHorizontalGroup(
             MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(MonCompteLayout.createSequentialGroup()
+                .addGroup(MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MonCompteLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(msgMonCompte, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MonCompteNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(NewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(MonCompteLayout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         MonCompteLayout.setVerticalGroup(
             MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+            .addGroup(MonCompteLayout.createSequentialGroup()
+                .addGap(148, 148, 148)
+                .addGroup(MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(msgMonCompte, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MonCompteNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(83, 83, 83)
+                .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         tabContainer.addTab("Mon Compte", MonCompte);
@@ -302,7 +521,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         );
         tabPanelLayout.setVerticalGroup(
             tabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabContainer)
+            .addComponent(tabContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout ContainerJpanelLayout = new javax.swing.GroupLayout(ContainerJpanel);
@@ -404,7 +623,40 @@ public class MainGuiBuilder extends javax.swing.JFrame {
 
     private void tabContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabContainerMouseClicked
         // TODO add your handling code here:
+        // dude to stupid java we have to do this : 
+        // consultation des offre 
+        if(tabContainer.getSelectedIndex()==0){
+        PostTableUpdate();
+        }
+        // stats
+        else if (tabContainer.getSelectedIndex()==1){
+            top5List = sService.getTop5Gouvernorat();
+            dataset = new DefaultPieDataset();
+            for (top top5List1 : top5List) {
+                dataset.setValue(top5List1.element, top5List1.nb);
+            }
+             graphe = ChartFactory.createPieChart3D("Top 5 gouvernorat", dataset,true ,true ,false);
+             piePanel= new ChartPanel(graphe);
+           piePanel.setSize(400, 400);
+        Statistiques.add(piePanel);
+        piePanel.setVisible(true);
+        Statistiques.setVisible(true);
+            System.out.println("done");
+        }
+        // news letter
+        else if (tabContainer.getSelectedIndex()==2){}
+        // gestion utilisateurs
+        else if (tabContainer.getSelectedIndex()==3){
         UserTableUpdate();
+        }
+        // mon compte 
+        else if(tabContainer.getSelectedIndex()==4){}
+        
+        
+                
+                
+                
+                
     }//GEN-LAST:event_tabContainerMouseClicked
 
     private void UserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserTableMouseClicked
@@ -451,6 +703,24 @@ public class MainGuiBuilder extends javax.swing.JFrame {
          new addUser().setVisible(true);
     }//GEN-LAST:event_addUserButtonMouseClicked
 
+    private void searchUser1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUser1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchUser1KeyReleased
+
+    private void addPostBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPostBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addPostBtnMouseClicked
+
+    private void PostTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PostTableMouseClicked
+
+    private void filterPrixStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_filterPrixStateChanged
+        // TODO add your handling code here:
+        int pf = filterPrix.getValue();
+        msgPrix.setText(pf*10000+" DT");
+    }//GEN-LAST:event_filterPrixStateChanged
+
     
     public static void UserTableUpdate(){
     
@@ -470,6 +740,28 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             UserTable.setValueAt(listUser.get(i).getAdresse(), i, 5);
             UserTable.setValueAt(listUser.get(i).getTelephone(), i, 6);
             UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
+        }
+    }
+    
+      public static void PostTableUpdate(){
+    
+    
+     DefaultTableModel postTabelModel = (DefaultTableModel) PostTable.getModel();
+        
+         listPost = pService.getPostList();
+        
+         postTabelModel.setRowCount(listPost.size());
+        for (int i = 0; i < listPost.size(); i++) {
+
+            PostTable.setValueAt(listPost.get(i).getId(), i, 0);
+            PostTable.setValueAt(listPost.get(i).getTitre(), i, 1);
+            PostTable.setValueAt(listPost.get(i).getText(), i, 2);
+            PostTable.setValueAt(listPost.get(i).getDateCreation(), i, 3);
+            PostTable.setValueAt(listPost.get(i).getGouvernorat(), i, 4);
+            PostTable.setValueAt(listPost.get(i).getRubrique(), i, 5);
+            PostTable.setValueAt(listPost.get(i).getNature(), i, 6);
+            PostTable.setValueAt(listPost.get(i).getType(), i, 7);
+            PostTable.setValueAt(listPost.get(i).getPrix(), i, 8);
         }
     }
     /**
@@ -503,6 +795,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainGuiBuilder().setVisible(true);
+                PostTableUpdate();
 
             }
         });
@@ -512,24 +805,44 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ConsultationOffres;
     private javax.swing.JPanel ContainerJpanel;
+    private javax.swing.JComboBox FilterGouvernorat;
+    private javax.swing.JComboBox FilterNature;
+    private javax.swing.JComboBox FilterType;
+    private javax.swing.JComboBox FiltreRubrique;
     private javax.swing.JPanel GestionUtilisateurs;
     private javax.swing.JButton LoginButton;
     private javax.swing.JPanel LoginJpanel;
+    private javax.swing.JButton LogoutBtn;
     private javax.swing.JPanel MainJpanel;
     private javax.swing.JPanel MonCompte;
+    private javax.swing.JPasswordField MonCompteNewPass;
+    private javax.swing.JButton NewPasswordBtn;
     private javax.swing.JPanel NewsLetter;
+    public static javax.swing.JTable PostTable;
+    javax.swing.JScrollPane PostTableScroll;
     private javax.swing.JPanel Statistiques;
     public static javax.swing.JTable UserTable;
     javax.swing.JScrollPane UserTableScroll;
+    private javax.swing.JButton addPostBtn;
     private javax.swing.JButton addUserButton;
+    private javax.swing.JSlider filterPrix;
     private javax.swing.JComboBox filterUser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField loginText;
+    private javax.swing.JLabel msgMonCompte;
+    private javax.swing.JLabel msgPrix;
     private javax.swing.JLabel msqLabel;
     private javax.swing.JPasswordField passwordText;
     private javax.swing.JTextField searchUser;
+    private javax.swing.JTextField searchUser1;
     private javax.swing.JTabbedPane tabContainer;
     private javax.swing.JPanel tabPanel;
     private javax.swing.JLabel welcomeWagon;
