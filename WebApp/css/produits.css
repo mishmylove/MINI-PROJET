@@ -1,0 +1,121 @@
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body, button{
+  font-family: 'Helvetica Neue', arial, sans-serif;
+}
+
+.controls{
+    padding: 2%;
+  background: #FFFFFF;
+  color: #0B0B0B;
+}
+
+label{
+  font-weight: 300;
+  margin: 0 .4em 0 0;
+}
+
+button{
+  display: inline-block;
+  padding: .4em .8em;
+  background: #292929;
+  border: 0;
+  color: #ddd;
+  border-radius: 1px;
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 1px;
+  cursor: pointer;
+}
+
+button.active{
+   background: #FF8200;
+  border-radius: 1px;
+  color: #0B0B0B;
+  font-weight: 700;
+}
+
+button:focus{
+  outline: 0 none;
+}
+
+button + label{
+  margin-left: 1em;
+}
+
+.ContainerP{
+ padding: 2% 2% 0;
+  text-align: justify;
+  font-size: 0.1px;
+  height: auto;
+  margin-bottom: 24px;
+  background: #FFFFFF;
+  -webkit-backface-visibility: hidden;
+}
+
+.ContainerP:after{
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+
+.ContainerP .mix,
+.ContainerP .gap{
+  display: inline-block;
+  width: 49%;
+}
+
+.ContainerP .mix{
+  text-align: left;
+  background: #03899c;
+  margin-bottom: 2%;
+  display: none;
+}
+
+.ContainerP .mix.category-1{
+  border-top: none;
+}
+
+.ContainerP .mix.category-2{
+  border-top: none;
+}
+
+.ContainerP .mix.category-3{
+  border-top: none;
+}
+.ContainerP .mix.category-4{
+  border-top: none;
+}
+.ContainerP .mix:after{
+  content: attr(data-myorder);
+  color: white;
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 4% 6%;
+  font-weight: 700;
+}
+
+.ContainerP .mix:before{
+  content: '';
+  display: inline-block;
+  padding-top: 60%;
+}
+
+@media all and (min-width: 420px){
+  .ContainerP .mix,
+  .ContainerP .gap{
+    width: 32%;
+  }
+}
+
+@media all and (min-width: 640px){
+  .ContainerP .mix,
+  .ContainerP .gap{
+    width: 23.5%;
+  }
+}
