@@ -37,6 +37,35 @@ public class statsService {
         }
     }
     
+     public ArrayList<top> getTop5User(){
+        try {
+            
+             return sDAO.getTop5User();
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(statsService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+     
+     public int getTotalPost(){
+        try {
+            return sDAO.getTotalPost();
+        } catch (SQLException ex) {
+            Logger.getLogger(statsService.class.getName()).log(Level.SEVERE, null, ex);
+             return 0;
+        }
+     }
+     
+       public int getTotalUser(){
+        try {
+            return sDAO.getTotalUser();
+        } catch (SQLException ex) {
+            Logger.getLogger(statsService.class.getName()).log(Level.SEVERE, null, ex);
+             return 0;
+        }
+     }
+    
     
     
     

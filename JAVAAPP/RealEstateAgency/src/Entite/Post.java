@@ -6,63 +6,39 @@
 package Entite;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author halloul
  */
-@Entity
-@Table(name = "post")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p"),
-    @NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id"),
-    @NamedQuery(name = "Post.findByTitre", query = "SELECT p FROM Post p WHERE p.titre = :titre"),
-    @NamedQuery(name = "Post.findByText", query = "SELECT p FROM Post p WHERE p.text = :text"),
-    @NamedQuery(name = "Post.findByDateCreation", query = "SELECT p FROM Post p WHERE p.dateCreation = :dateCreation"),
-    @NamedQuery(name = "Post.findByGouvernorat", query = "SELECT p FROM Post p WHERE p.gouvernorat = :gouvernorat"),
-    @NamedQuery(name = "Post.findByRubrique", query = "SELECT p FROM Post p WHERE p.rubrique = :rubrique"),
-    @NamedQuery(name = "Post.findByNature", query = "SELECT p FROM Post p WHERE p.nature = :nature"),
-    @NamedQuery(name = "Post.findByType", query = "SELECT p FROM Post p WHERE p.type = :type"),
-    @NamedQuery(name = "Post.findByPrix", query = "SELECT p FROM Post p WHERE p.prix = :prix")})
+
 public class Post implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
+   
+    
     private Integer id;
-    @Column(name = "titre")
+  
     private String titre;
-    @Column(name = "text")
+ 
     private String text;
-    @Column(name = "dateCreation")
+ 
     private String dateCreation;
-    @Basic(optional = false)
-    @Column(name = "gouvernorat")
+  
+  
     private String gouvernorat;
-    @Basic(optional = false)
-    @Column(name = "rubrique")
+
     private String rubrique;
-    @Basic(optional = false)
-    @Column(name = "nature")
+
+
     private String nature;
-    @Basic(optional = false)
-    @Column(name = "type")
+   
+
     private String type;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "prix")
-    private Float prix;
+  
+    private int prix;
+  
+    private Integer user_id;
+    
+    private String userMail;
 
     public Post() {
     }
@@ -71,7 +47,7 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public Post(Integer id, String titre, String text, String dateCreation, String gouvernorat, String rubrique, String nature, String type, Float prix) {
+    public Post(Integer id, String titre, String text, String dateCreation, String gouvernorat, String rubrique, String nature, String type, int prix, Integer user_id) {
         this.id = id;
         this.titre = titre;
         this.text = text;
@@ -81,15 +57,36 @@ public class Post implements Serializable {
         this.nature = nature;
         this.type = type;
         this.prix = prix;
+        this.user_id = user_id;
     }
-
-    public Post(Integer id, String gouvernorat, String rubrique, String nature, String type) {
+    
+    public Post(Integer id, String titre, String text, String dateCreation, String gouvernorat, String rubrique, String nature, String type, int prix, String userMail) {
         this.id = id;
+        this.titre = titre;
+        this.text = text;
+        this.dateCreation = dateCreation;
         this.gouvernorat = gouvernorat;
         this.rubrique = rubrique;
         this.nature = nature;
         this.type = type;
+        this.prix = prix;
+        this.userMail = userMail;
     }
+    
+      public Post(Integer id, String titre, String text, String dateCreation, String gouvernorat, String rubrique, String nature, String type, int prix) {
+        this.id = id;
+        this.titre = titre;
+        this.text = text;
+        this.dateCreation = dateCreation;
+        this.gouvernorat = gouvernorat;
+        this.rubrique = rubrique;
+        this.nature = nature;
+        this.type = type;
+        this.prix = prix;
+       
+    }
+    
+    
 
     public Integer getId() {
         return id;
@@ -155,13 +152,31 @@ public class Post implements Serializable {
         this.type = type;
     }
 
-    public Float getPrix() {
+    public int getPrix() {
         return prix;
     }
 
-    public void setPrix(Float prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getUserMail() {
+        return userMail;
+    }
+
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
+    }
+    
+    
 
     @Override
     public int hashCode() {

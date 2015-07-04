@@ -11,8 +11,6 @@ import BLL.postService;
 import Entite.User;
 import Entite.top;
 import Entite.Post;
-import static Gui.Dashboard.SelectedId;
-import static Gui.Dashboard.Us;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -35,14 +33,16 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     /**
      * Creates new form MainGuiBuilder
      */
-    User appUser,updateUser;
+    User appUser, updateUser;
+    Post updatePost;
     public static String SelectedId = "-1";
-    public static ArrayList<User>  listUser;
-    public static ArrayList<Post>  listPost;
-    DefaultPieDataset dataset;//Dataset qui va contenir les Données
-    JFreeChart graphe;        //Graphe
-    ChartPanel piePanel;            //Panel
-    ArrayList<top> top5List;
+    public static ArrayList<User> listUser;
+    public static ArrayList<Post> listPost;
+     public static DefaultPieDataset dataset;//Dataset qui va contenir les Données
+     public static JFreeChart graphe;        //Graphe
+     public static ChartPanel piePanel,pie2panel;            //Panel
+     public static ArrayList<top> top5List;
+     public static int nbrPost,nbrUser;
 
     public MainGuiBuilder() {
         initComponents();
@@ -75,10 +75,9 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         tabPanel = new javax.swing.JPanel();
         tabContainer = new javax.swing.JTabbedPane();
         ConsultationOffres = new javax.swing.JPanel();
-        searchUser1 = new javax.swing.JTextField();
+        searchPost = new javax.swing.JTextField();
         addPostBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        msgPrix = new javax.swing.JLabel();
         FilterGouvernorat = new javax.swing.JComboBox();
         PostTableScroll = new javax.swing.JScrollPane();
         PostTable = new javax.swing.JTable();
@@ -91,7 +90,10 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         filterPrix = new javax.swing.JSlider();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        msgPost = new javax.swing.JLabel();
         Statistiques = new javax.swing.JPanel();
+        msgnbrPost = new javax.swing.JLabel();
+        msgnbrUser = new javax.swing.JLabel();
         NewsLetter = new javax.swing.JPanel();
         GestionUtilisateurs = new javax.swing.JPanel();
         UserTableScroll = new javax.swing.JScrollPane();
@@ -101,10 +103,11 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         filterUser = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         MonCompte = new javax.swing.JPanel();
-        msgMonCompte = new javax.swing.JLabel();
+        msgChangePassword = new javax.swing.JLabel();
         MonCompteNewPass = new javax.swing.JPasswordField();
         NewPasswordBtn = new javax.swing.JButton();
         LogoutBtn = new javax.swing.JButton();
+        msgMonCompte1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,10 +190,10 @@ public class MainGuiBuilder extends javax.swing.JFrame {
 
         ConsultationOffres.setPreferredSize(new java.awt.Dimension(800, 584));
 
-        searchUser1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        searchUser1.addKeyListener(new java.awt.event.KeyAdapter() {
+        searchPost.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        searchPost.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                searchUser1KeyReleased(evt);
+                searchPostKeyReleased(evt);
             }
         });
 
@@ -204,26 +207,28 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Recherche Offre/demande :");
 
-        msgPrix.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        msgPrix.setText("1000000 DT");
-
         FilterGouvernorat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Ariana", "Béja", "Ben Arous", "Bizerte", "Gabès", "Gafsa", "Jendouba", "Kairouan", "Kasserine", "Kébili", "La Manouba", "Le Kef", "Mahdia", "Médenine", "Monastir", "Nabeul", "Sfax", "Sidi Bouzi", "Siliana", "Sousse", "Tataouine", "Tozeur", "Tunis", "Zaghouan" }));
+        FilterGouvernorat.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                FilterGouvernoratItemStateChanged(evt);
+            }
+        });
 
         PostTableScroll.setEnabled(false);
 
         PostTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Titre", "Text", "Date Creation", "Gouvernorat", "Rubrique", "Nature", "Type", "Prix"
+                "ID", "Titre", "Text", "Date Creation", "Gouvernorat", "Rubrique", "Nature", "Type", "Prix", "User"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -248,13 +253,28 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         jLabel6.setText("Rubrique : ");
 
         FiltreRubrique.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Offres", "Demandes" }));
+        FiltreRubrique.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                FiltreRubriqueItemStateChanged(evt);
+            }
+        });
 
         FilterNature.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Achat", "Location", "Terrain", "Vente" }));
+        FilterNature.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                FilterNatureItemStateChanged(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Nature :");
 
         FilterType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Appartement", "Duplex", "Maison", "Terrain agricole", "Terrain nu" }));
+        FilterType.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                FilterTypeItemStateChanged(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("Type :");
@@ -272,6 +292,9 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel10.setText("Prix :");
 
+        msgPost.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        msgPost.setText("1000000 DT");
+
         javax.swing.GroupLayout ConsultationOffresLayout = new javax.swing.GroupLayout(ConsultationOffres);
         ConsultationOffres.setLayout(ConsultationOffresLayout);
         ConsultationOffresLayout.setHorizontalGroup(
@@ -282,18 +305,26 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                     .addGroup(ConsultationOffresLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(226, 226, 226)
                         .addComponent(addPostBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21))
                     .addGroup(ConsultationOffresLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FilterGouvernorat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FiltreRubrique, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ConsultationOffresLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(filterPrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(msgPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ConsultationOffresLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FilterGouvernorat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FiltreRubrique, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -302,14 +333,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FilterType, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(ConsultationOffresLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(filterPrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(msgPrix, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(PostTableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
         );
@@ -319,7 +343,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchUser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addPostBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -332,10 +356,11 @@ public class MainGuiBuilder extends javax.swing.JFrame {
                     .addComponent(FilterType)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(msgPrix, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(filterPrix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(msgPost, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(filterPrix, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(450, 450, 450))
             .addGroup(ConsultationOffresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(ConsultationOffresLayout.createSequentialGroup()
@@ -348,15 +373,31 @@ public class MainGuiBuilder extends javax.swing.JFrame {
 
         Statistiques.setPreferredSize(new java.awt.Dimension(800, 584));
 
+        msgnbrPost.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        msgnbrPost.setToolTipText("");
+
+        msgnbrUser.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        msgnbrUser.setToolTipText("");
+
         javax.swing.GroupLayout StatistiquesLayout = new javax.swing.GroupLayout(Statistiques);
         Statistiques.setLayout(StatistiquesLayout);
         StatistiquesLayout.setHorizontalGroup(
             StatistiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(StatistiquesLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(StatistiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(msgnbrPost, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(msgnbrUser, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         StatistiquesLayout.setVerticalGroup(
             StatistiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StatistiquesLayout.createSequentialGroup()
+                .addContainerGap(478, Short.MAX_VALUE)
+                .addComponent(msgnbrUser, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(msgnbrPost, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
 
         tabContainer.addTab("Statistiques", Statistiques);
@@ -469,44 +510,61 @@ public class MainGuiBuilder extends javax.swing.JFrame {
 
         MonCompte.setPreferredSize(new java.awt.Dimension(800, 584));
 
-        msgMonCompte.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        msgMonCompte.setText("Changement mot de passe");
+        msgChangePassword.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        msgChangePassword.setForeground(new java.awt.Color(255, 0, 0));
 
         MonCompteNewPass.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         NewPasswordBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         NewPasswordBtn.setText("Valider");
+        NewPasswordBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NewPasswordBtnMouseClicked(evt);
+            }
+        });
 
         LogoutBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         LogoutBtn.setText("Déconnexion");
+        LogoutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogoutBtnMouseClicked(evt);
+            }
+        });
+
+        msgMonCompte1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        msgMonCompte1.setText("Changement mot de passe :");
 
         javax.swing.GroupLayout MonCompteLayout = new javax.swing.GroupLayout(MonCompte);
         MonCompte.setLayout(MonCompteLayout);
         MonCompteLayout.setHorizontalGroup(
             MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MonCompteLayout.createSequentialGroup()
-                .addGroup(MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MonCompteLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(msgMonCompte, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MonCompteNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(NewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(MonCompteLayout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGroup(MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(msgChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(MonCompteLayout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(msgMonCompte1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(MonCompteNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(55, 55, 55)
+                            .addComponent(NewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(MonCompteLayout.createSequentialGroup()
+                            .addGap(281, 281, 281)
+                            .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         MonCompteLayout.setVerticalGroup(
             MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MonCompteLayout.createSequentialGroup()
                 .addGap(148, 148, 148)
                 .addGroup(MonCompteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(msgMonCompte, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MonCompteNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83)
+                    .addComponent(NewPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(msgMonCompte1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(msgChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(269, Short.MAX_VALUE))
         );
@@ -529,10 +587,10 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         ContainerJpanelLayout.setHorizontalGroup(
             ContainerJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(ContainerJpanelLayout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addComponent(welcomeWagon, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContainerJpanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(welcomeWagon, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
         ContainerJpanelLayout.setVerticalGroup(
             ContainerJpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,7 +622,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
         //check empty login
-        /*
+       
          if (loginText.getText().equals("")) {
          loginText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
          msqLabel.setVisible(true);
@@ -584,13 +642,14 @@ public class MainGuiBuilder extends javax.swing.JFrame {
          passwordText.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
          msqLabel.setVisible(false);
          }
-*/
+         
         // go for login 
-        //appUser = uService.loginByMail(loginText.getText(), passwordText.getText());
-        appUser = uService.loginByMail("Admin@admin.com", "admin");
+        appUser = uService.loginByMail(loginText.getText(), passwordText.getText());
+        //appUser = uService.loginByMail("Admin@admin.com", "1234");
         if (appUser != null) {
             CardLayout card = (CardLayout) MainJpanel.getLayout();
             card.show(MainJpanel, "containerPanel");
+            tabContainer.setSelectedIndex(0);
             // 0 : offre 
             // 1 : stats
             // 2 : newletter 
@@ -621,70 +680,104 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LoginButtonActionPerformed
 
-    private void tabContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabContainerMouseClicked
-        // TODO add your handling code here:
-        // dude to stupid java we have to do this : 
-        // consultation des offre 
-        if(tabContainer.getSelectedIndex()==0){
-        PostTableUpdate();
-        }
-        // stats
-        else if (tabContainer.getSelectedIndex()==1){
-            top5List = sService.getTop5Gouvernorat();
+    public static void moreStats(){
+        nbrPost=sService.getTotalPost();
+        nbrUser=sService.getTotalUser();
+        msgnbrPost.setVisible(true);
+        msgnbrUser.setVisible(true);
+        msgnbrPost.setText("Le nombre total des offres est : "+nbrPost);
+        msgnbrUser.setText("Le nombre total des utilisateurs est : "+nbrUser);
+    }
+    
+    public static void genTop5Gov(){
+top5List = sService.getTop5Gouvernorat();
             dataset = new DefaultPieDataset();
             for (top top5List1 : top5List) {
                 dataset.setValue(top5List1.element, top5List1.nb);
             }
-             graphe = ChartFactory.createPieChart3D("Top 5 gouvernorat", dataset,true ,true ,false);
-             piePanel= new ChartPanel(graphe);
-           piePanel.setSize(400, 400);
-        Statistiques.add(piePanel);
-        piePanel.setVisible(true);
-        Statistiques.setVisible(true);
-            System.out.println("done");
-        }
-        // news letter
-        else if (tabContainer.getSelectedIndex()==2){}
-        // gestion utilisateurs
-        else if (tabContainer.getSelectedIndex()==3){
-        UserTableUpdate();
-        }
-        // mon compte 
-        else if(tabContainer.getSelectedIndex()==4){}
+            graphe = ChartFactory.createPieChart3D("Top 5 gouvernorat", dataset, true, true, false);
+           
+            piePanel = new ChartPanel(graphe);
+          
+            piePanel.setSize(400, 400);
         
+            Statistiques.add(piePanel);
+            
+            piePanel.setVisible(true);
+             
+            Statistiques.setVisible(true);
+            
+}
+public static void genTop5User(){
+top5List = sService.getTop5User();
+            dataset = new DefaultPieDataset();
+            for (top top5List1 : top5List) {
+                dataset.setValue(top5List1.element, top5List1.nb);
+            }
+            graphe = ChartFactory.createPieChart3D("Top 5 user", dataset, true, true, false);
+            pie2panel = new ChartPanel(graphe);
         
-                
-                
-                
-                
+            pie2panel.setSize(400, 400);
+            pie2panel.setBounds(400 , 0 ,400, 400);
+            Statistiques.add(pie2panel);
+   
+            pie2panel.setVisible(true);
+            Statistiques.setVisible(true);
+            
+}
+    private void tabContainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabContainerMouseClicked
+        // TODO add your handling code here:
+        // dude to stupid java we have to do this : 
+       
+// consultation des offre 
+        
+        if (tabContainer.getSelectedIndex() == 0) {
+            
+            PostTableUpdate();
+        } // stats
+        else if (tabContainer.getSelectedIndex() == 1) {
+            genTop5Gov();
+            genTop5User();
+            moreStats();
+        } // news letter
+        else if (tabContainer.getSelectedIndex() == 2) {
+        } // gestion utilisateurs
+        else if (tabContainer.getSelectedIndex() == 3) {
+            UserTableUpdate();
+        } // mon compte 
+        else if (tabContainer.getSelectedIndex() == 4) {
+        }
+
+
     }//GEN-LAST:event_tabContainerMouseClicked
 
     private void UserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserTableMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 1)
-        updateUser = new User(
-         (int)UserTable.getValueAt(UserTable.getSelectedRow(), 0),    
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 1)),  
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 2)),  
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 3)),  
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 4)),  
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 5)),  
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 6)),  
-        String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 7))             
-        );
+        if (evt.getClickCount() == 1) {
+            updateUser = new User(
+                    (int) UserTable.getValueAt(UserTable.getSelectedRow(), 0),
+                    String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 1)),
+                    String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 2)),
+                    String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 3)),
+                    String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 4)),
+                    String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 5)),
+                    String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 6)),
+                    String.valueOf(UserTable.getValueAt(UserTable.getSelectedRow(), 7))
+            );
+        }
         new GestUser(updateUser).setVisible(true);
     }//GEN-LAST:event_UserTableMouseClicked
 
     private void searchUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUserKeyReleased
         // TODO add your handling code here:
         // getting filter selection first ! 
-        String filter=(String) filterUser.getSelectedItem();
+        String filter = (String) filterUser.getSelectedItem();
         String text = searchUser.getText();
         DefaultTableModel userTabelModel = (DefaultTableModel) UserTable.getModel();
-        
-         listUser = uService.searchUser(filter, text);
+
+        listUser = uService.searchUser(filter, text);
         //userTableModel.
-         userTabelModel.setRowCount(listUser.size());
+        userTabelModel.setRowCount(listUser.size());
         for (int i = 0; i < listUser.size(); i++) {
 
             UserTable.setValueAt(listUser.get(i).getId(), i, 0);
@@ -700,36 +793,134 @@ public class MainGuiBuilder extends javax.swing.JFrame {
 
     private void addUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserButtonMouseClicked
         // TODO add your handling code here:
-         new addUser().setVisible(true);
+        new addUser().setVisible(true);
     }//GEN-LAST:event_addUserButtonMouseClicked
 
-    private void searchUser1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUser1KeyReleased
+    private void searchPostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchPostKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchUser1KeyReleased
+        recherchePost();
+    }//GEN-LAST:event_searchPostKeyReleased
 
     private void addPostBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPostBtnMouseClicked
         // TODO add your handling code here:
+        new addPost(appUser.getId()).setVisible(true);
     }//GEN-LAST:event_addPostBtnMouseClicked
-
-    private void PostTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PostTableMouseClicked
 
     private void filterPrixStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_filterPrixStateChanged
         // TODO add your handling code here:
         int pf = filterPrix.getValue();
-        msgPrix.setText(pf*10000+" DT");
+        msgPost.setText(pf * 10000 + " DT");
+        recherchePost();
     }//GEN-LAST:event_filterPrixStateChanged
 
+    private void LogoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutBtnMouseClicked
+        // TODO add your handling code here:
+        logout();
+    }//GEN-LAST:event_LogoutBtnMouseClicked
+
+    private void NewPasswordBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPasswordBtnMouseClicked
+        // TODO add your handling code here:
+        String newPass=MonCompteNewPass.getText();
+        if(newPass.length()==0&&newPass.length()<4)
+        {
+         MonCompteNewPass.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+         msgChangePassword.setVisible(true);
+         msgChangePassword.setText("le password doit être de 4 caractères ou plus.");
+        MonCompteNewPass.setText("");
+        msgChangePassword.setVisible(false);
+        }else{
+        appUser.setPassword(newPass);
+        uService.updateUser(appUser);
+        MonCompteNewPass.setText("");
+        logout();
+        }
+    }//GEN-LAST:event_NewPasswordBtnMouseClicked
+
+    private void FilterGouvernoratItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_FilterGouvernoratItemStateChanged
+        // TODO add your handling code here:
+        recherchePost();
+    }//GEN-LAST:event_FilterGouvernoratItemStateChanged
+
+    private void FiltreRubriqueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_FiltreRubriqueItemStateChanged
+        // TODO add your handling code here:
+        recherchePost();
+    }//GEN-LAST:event_FiltreRubriqueItemStateChanged
+
+    private void FilterNatureItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_FilterNatureItemStateChanged
+        // TODO add your handling code here:
+        recherchePost();
+    }//GEN-LAST:event_FilterNatureItemStateChanged
+
+    private void FilterTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_FilterTypeItemStateChanged
+        // TODO add your handling code here:
+        recherchePost();
+    }//GEN-LAST:event_FilterTypeItemStateChanged
+
+    private void PostTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTableMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 1&& appUser.getMail().equalsIgnoreCase(String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 9)))) {
+            updatePost = new Post(
+                    (int) PostTable.getValueAt(PostTable.getSelectedRow(), 0),
+                    String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 1)),
+                    String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 2)),
+                    String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 3)),
+                    String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 4)),
+                    String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 5)),
+                    String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 6)),
+                    String.valueOf(PostTable.getValueAt(PostTable.getSelectedRow(), 7)),
+                    (int)PostTable.getValueAt(PostTable.getSelectedRow(), 8)
+            );
+        }
+        new GestPost(updatePost).setVisible(true);
+    }//GEN-LAST:event_PostTableMouseClicked
+
     
-    public static void UserTableUpdate(){
-    
-    
-     DefaultTableModel userTabelModel = (DefaultTableModel) UserTable.getModel();
+    public void recherchePost() {
         
-         listUser = uService.getUserList();
+        String titre =searchPost.getText();
+        String gouvernorat = (String) FilterGouvernorat.getSelectedItem();
+        String rubrique = (String) FiltreRubrique.getSelectedItem();
+        String nature = (String) FilterNature.getSelectedItem();
+        String type = (String) FilterType.getSelectedItem();
+        int prix =  filterPrix.getValue()*10000;
+        System.out.println(prix);
+       ArrayList<Post> pList= pService.searchPost(titre, gouvernorat, rubrique, nature, type, prix);
+        
+        DefaultTableModel postTabelModel = (DefaultTableModel) PostTable.getModel();
+
+       
         //userTableModel.
-         userTabelModel.setRowCount(listUser.size());
+        postTabelModel.setRowCount(pList.size());
+        for (int i = 0; i < pList.size(); i++) {
+
+            PostTable.setValueAt(pList.get(i).getId(), i, 0);
+            PostTable.setValueAt(pList.get(i).getTitre(), i, 1);
+            PostTable.setValueAt(pList.get(i).getText(), i, 2);
+            PostTable.setValueAt(pList.get(i).getDateCreation(), i, 3);
+            PostTable.setValueAt(pList.get(i).getGouvernorat(), i, 4);
+            PostTable.setValueAt(pList.get(i).getRubrique(), i, 5);
+            PostTable.setValueAt(pList.get(i).getNature(), i, 6);
+            PostTable.setValueAt(pList.get(i).getType(), i, 7);
+            PostTable.setValueAt(pList.get(i).getPrix(), i, 8);
+            PostTable.setValueAt(pList.get(i).getUserMail(), i, 9);
+        }
+        
+        
+        
+    }
+    public void logout() {
+
+        CardLayout card = (CardLayout) MainJpanel.getLayout();
+        card.show(MainJpanel, "loginPanel");
+    }
+
+    public static void UserTableUpdate() {
+
+        DefaultTableModel userTabelModel = (DefaultTableModel) UserTable.getModel();
+
+        listUser = uService.getUserList();
+        //userTableModel.
+        userTabelModel.setRowCount(listUser.size());
         for (int i = 0; i < listUser.size(); i++) {
 
             UserTable.setValueAt(listUser.get(i).getId(), i, 0);
@@ -742,15 +933,14 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             UserTable.setValueAt(listUser.get(i).getUserType(), i, 7);
         }
     }
-    
-      public static void PostTableUpdate(){
-    
-    
-     DefaultTableModel postTabelModel = (DefaultTableModel) PostTable.getModel();
-        
-         listPost = pService.getPostList();
-        
-         postTabelModel.setRowCount(listPost.size());
+
+    public static void PostTableUpdate() {
+
+        DefaultTableModel postTabelModel = (DefaultTableModel) PostTable.getModel();
+
+        listPost = pService.getPostList();
+
+        postTabelModel.setRowCount(listPost.size());
         for (int i = 0; i < listPost.size(); i++) {
 
             PostTable.setValueAt(listPost.get(i).getId(), i, 0);
@@ -762,8 +952,10 @@ public class MainGuiBuilder extends javax.swing.JFrame {
             PostTable.setValueAt(listPost.get(i).getNature(), i, 6);
             PostTable.setValueAt(listPost.get(i).getType(), i, 7);
             PostTable.setValueAt(listPost.get(i).getPrix(), i, 8);
+            PostTable.setValueAt(listPost.get(i).getUserMail(), i, 9);
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -795,6 +987,9 @@ public class MainGuiBuilder extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainGuiBuilder().setVisible(true);
+                genTop5Gov(); 
+                genTop5User();
+                moreStats();
                 PostTableUpdate();
 
             }
@@ -820,7 +1015,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     private javax.swing.JPanel NewsLetter;
     public static javax.swing.JTable PostTable;
     javax.swing.JScrollPane PostTableScroll;
-    private javax.swing.JPanel Statistiques;
+    private static javax.swing.JPanel Statistiques;
     public static javax.swing.JTable UserTable;
     javax.swing.JScrollPane UserTableScroll;
     private javax.swing.JButton addPostBtn;
@@ -837,12 +1032,15 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField loginText;
-    private javax.swing.JLabel msgMonCompte;
-    private javax.swing.JLabel msgPrix;
+    private javax.swing.JLabel msgChangePassword;
+    private javax.swing.JLabel msgMonCompte1;
+    private javax.swing.JLabel msgPost;
+    private static javax.swing.JLabel msgnbrPost;
+    private static javax.swing.JLabel msgnbrUser;
     private javax.swing.JLabel msqLabel;
     private javax.swing.JPasswordField passwordText;
+    private javax.swing.JTextField searchPost;
     private javax.swing.JTextField searchUser;
-    private javax.swing.JTextField searchUser1;
     private javax.swing.JTabbedPane tabContainer;
     private javax.swing.JPanel tabPanel;
     private javax.swing.JLabel welcomeWagon;
