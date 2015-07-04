@@ -33,7 +33,7 @@
         <header class="site-header">
       </header>
       <div class="search">   
-        <div> <a href="" class="btn-search">Decouvrir nos annonces</a></div>      
+        <div> <a href="../Acceuil.html" class="btn-search">Decouvrir nos annonces</a></div>      
         </div>
 
       <div class="content">
@@ -75,10 +75,7 @@
       <td>prix</td>
       <td><input type="text" name="prix"  class="input-form-modif" ></td>
     </tr>
-<tr align="center">
-      <td> Utilisateur </td>
-      <td><input type="text" name="user_id"  class="input-form-modif" ></td>
-    </tr>
+
     <tr align="center">
       <td colspan="2"><input type="submit" class="btn-modif" value="Ajouter"></td>
     </tr>

@@ -235,7 +235,7 @@ function getSearchPost(term){
 $.ajax({
   method: "GET",
         cache:false,
-        url: "http://127.0.0.1/mini-projet/WebApp/php/search.php",
+        url: "http://127.0.0.1/MINI%20PROJET/WEBAPP/php/search.php",
         data: { gouvernorat: gouvernorat, 
   		  rubrique: rubrique, 
   		  nature: nature, 
@@ -244,40 +244,21 @@ $.ajax({
         dataType: 'json'
 })
   .done(function( data ) {
+
+  	if(data.length>0){
+  	$("#contentContainer").empty();
+
         	for(var i =0;i<data.length;i++){
-        	console.log(data.length);
+        	
 			var tmp = postTemplate;
 			tmp=tmp.replace("{{titre}}", data[i]["titre"]);
 			$("#contentContainer").append(tmp);
 			}
+	}
+	else 
+		$("#contentContainer").append("<h2>Aucune offres</h2>");
   });
-	    /*$.ajax({
-	    method: "GET",
-        cache:false,
-        url: "http://127.0.0.1/MINI%20PROJET/WEBAPP/php/search.php",
-        data: { gouvernorat: gouvernorat, 
-  		  rubrique: rubrique, 
-  		  nature: nature, 
-  		  type: type 
-  		},
-        dataType: 'json',
-        done: function(json) {
 
-        	var data = json;
-
-        	for(var i =0;i<data.length;i++){
-        	console.log(data.length);
-			var tmp = postTemplate;
-			tmp=tmp.replace("{{titre}}", data[i]["titre"]);
-			$("#contentContainer").append(tmp);
-			}
-
-
-        },
-        error: function() {          
-            console.log("oops");
-            //Error message
-    }});*/
 
 	
 }

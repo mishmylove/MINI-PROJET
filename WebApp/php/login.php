@@ -8,6 +8,7 @@ $resultat = mysql_query($requete);
 $resultat1 = mysql_fetch_array($resultat);
 if ($resultat1['mail']!="") {
   session_start();
+  $_SESSION['id']= $resultat1['id'];
  $_SESSION['login'] = $_POST["login"];
  $_SESSION["pass"] = $_POST["pass"] ;
 	header('Location: ../vendeur.html');
