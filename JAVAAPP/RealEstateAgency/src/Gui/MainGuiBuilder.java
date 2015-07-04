@@ -622,7 +622,7 @@ public class MainGuiBuilder extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
         //check empty login
-       /*
+       
          if (loginText.getText().equals("")) {
          loginText.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
          msqLabel.setVisible(true);
@@ -641,11 +641,11 @@ public class MainGuiBuilder extends javax.swing.JFrame {
          } else {
          passwordText.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
          msqLabel.setVisible(false);
-         }*/
+         }
          
         // go for login 
-        //appUser = uService.loginByMail(loginText.getText(), passwordText.getText());
-        appUser = uService.loginByMail("Admin@admin.com", "1234");
+        appUser = uService.loginByMail(loginText.getText(), passwordText.getText());
+        //appUser = uService.loginByMail("Admin@admin.com", "1234");
         if (appUser != null) {
             CardLayout card = (CardLayout) MainJpanel.getLayout();
             card.show(MainJpanel, "containerPanel");
