@@ -22,8 +22,9 @@
 <div class="container">
 			<!-- Top Navigation -->
 			<div class="site-top clearfix">
-				<span class="right"><a  href="register.html"><span>Inscription</span></a></span>
-				<span class="right"><a  href="connexion.html"><span>Connexion</span></a></span>
+				<span class="right"><a  href="php/logout.php"><span>Déconnecté</span></a></span>
+				<span class="right"><a  href="php/AjoutAnnonce.php"><span>Ajouter Annonce</span></a></span>
+				<span class="right"><a  href="php/ListeAnnonce.php"><span>Listes  Annonce</span></a></span>
 		<div class="logo-site"><h1><a href="index.html"> Logo </a> <h1></div>
 		</div>
 		<header class="site-header">
@@ -98,6 +99,71 @@
 				<h2>Découvrez nos offres ; Achat , Vente ... </h2>
 				<div class="grid" id="contentContainer">
 					
+					<!--<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+												<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+						<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img05"/>
+						<figcaption>
+							<h2>Dreamy <span>Honey</span> <i>Now</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+						<figure class="effect-honey">
+						<img src="img/bedroom_small.jpg" alt="img04"/>
+						<figcaption>
+							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
+							<a href="single.html">Lire La Suite</a>
+						</figcaption>			
+					</figure>
+					-->
+				
 				</div>
 			</div>
 
@@ -162,8 +228,8 @@
     <!-- jssor.slider.mini.js = (jssor.js + jssor.slider.js) -->
     <script type="text/javascript" src="js/jssor.slider.mini.js"></script>
      <link rel="stylesheet" href="js/jquery.auto-complete.css">
-     <script src="js/jquery.auto-complete.js"></script>
-     <script type="text/javascript">
+  <script src="js/jquery.auto-complete.js"></script>
+    <script type="text/javascript">
 			$( document ).ready(function() {
     			console.log( "ready!" );
     			var gouvglobal;
@@ -235,7 +301,7 @@ function getSearchPost(term){
 $.ajax({
   method: "GET",
         cache:false,
-        url: "http://127.0.0.1/mini-projet/WebApp/php/search.php",
+        url: "http://127.0.0.1/MINI%20PROJET/WEBAPP/php/search.php",
         data: { gouvernorat: gouvernorat, 
   		  rubrique: rubrique, 
   		  nature: nature, 
@@ -244,6 +310,8 @@ $.ajax({
         dataType: 'json'
 })
   .done(function( data ) {
+
+
         	for(var i =0;i<data.length;i++){
         	console.log(data.length);
 			var tmp = postTemplate;
