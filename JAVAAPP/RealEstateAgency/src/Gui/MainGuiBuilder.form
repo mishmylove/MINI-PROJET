@@ -163,10 +163,10 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="tabPanel" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="287" max="-2" attributes="0"/>
-                      <Component id="welcomeWagon" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="welcomeWagon" min="-2" pref="502" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -236,19 +236,30 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel4" pref="208" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="searchUser1" min="-2" pref="176" max="-2" attributes="0"/>
+                                          <Component id="searchPost" min="-2" pref="176" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
                                           <Component id="addPostBtn" min="-2" pref="155" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="FilterGouvernorat" min="-2" pref="99" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="FiltreRubrique" min="-2" pref="99" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="filterPrix" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                                  <Component id="msgPost" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="FilterGouvernorat" min="-2" pref="99" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="FiltreRubrique" min="-2" pref="99" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -258,14 +269,6 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="FilterType" min="-2" pref="99" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="filterPrix" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                          <Component id="msgPrix" min="-2" pref="224" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -280,7 +283,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel4" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Component id="searchUser1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="searchPost" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="addPostBtn" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -295,10 +298,12 @@
                                       <Component id="jLabel9" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="msgPrix" pref="37" max="32767" attributes="0"/>
-                                      <Component id="filterPrix" max="32767" attributes="0"/>
-                                      <Component id="jLabel10" alignment="0" pref="37" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="msgPost" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="filterPrix" pref="37" max="32767" attributes="0"/>
+                                          <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="450" max="-2" attributes="0"/>
                               </Group>
@@ -313,14 +318,14 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="searchUser1">
+                        <Component class="javax.swing.JTextField" name="searchPost">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Dialog" size="14" style="1"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchUser1KeyReleased"/>
+                            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchPostKeyReleased"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="addPostBtn">
@@ -337,14 +342,6 @@
                               <Font name="Dialog" size="14" style="1"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Recherche Offre/demande :"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="msgPrix">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Dialog" size="14" style="1"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="1000000 DT"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JComboBox" name="FilterGouvernorat">
@@ -379,6 +376,9 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="FilterGouvernoratItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="PostTableScroll">
                           <Properties>
@@ -393,7 +393,7 @@
                             <Component class="javax.swing.JTable" name="PostTable">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="9" rowCount="1">
+                                  <Table columnCount="10" rowCount="1">
                                     <Column editable="false" title="ID" type="java.lang.Integer"/>
                                     <Column editable="false" title="Titre" type="java.lang.String"/>
                                     <Column editable="false" title="Text" type="java.lang.String"/>
@@ -403,6 +403,7 @@
                                     <Column editable="false" title="Nature" type="java.lang.String"/>
                                     <Column editable="false" title="Type" type="java.lang.String"/>
                                     <Column editable="false" title="Prix" type="java.lang.String"/>
+                                    <Column editable="false" title="User" type="java.lang.String"/>
                                   </Table>
                                 </Property>
                                 <Property name="cellSelectionEnabled" type="boolean" value="true"/>
@@ -436,6 +437,9 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="FiltreRubriqueItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JComboBox" name="FilterNature">
                           <Properties>
@@ -449,6 +453,9 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="FilterNatureItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel7">
                           <Properties>
@@ -471,6 +478,9 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="FilterTypeItemStateChanged"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel8">
                           <Properties>
@@ -504,6 +514,14 @@
                             <Property name="text" type="java.lang.String" value="Prix :"/>
                           </Properties>
                         </Component>
+                        <Component class="javax.swing.JLabel" name="msgPost">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="14" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="1000000 DT"/>
+                          </Properties>
+                        </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="Statistiques">
@@ -512,6 +530,9 @@
                           <Dimension value="[800, 584]"/>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                      </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                           <JTabbedPaneConstraints tabName="Statistiques">
@@ -523,15 +544,52 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="msgnbrPost" min="-2" pref="685" max="-2" attributes="0"/>
+                                      <Component id="msgnbrUser" min="-2" pref="681" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="87" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="589" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="478" max="32767" attributes="0"/>
+                                  <Component id="msgnbrUser" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="msgnbrPost" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="msgnbrPost">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="18" style="1"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="msgnbrUser">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="18" style="1"/>
+                            </Property>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="NewsLetter">
                       <Properties>
@@ -709,22 +767,25 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                          <Component id="msgMonCompte" min="-2" pref="271" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="MonCompteNewPass" min="-2" pref="229" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                          <Component id="NewPasswordBtn" min="-2" pref="98" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
-                                          <Component id="LogoutBtn" min="-2" pref="212" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="msgChangePassword" min="-2" pref="610" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                              <Component id="msgMonCompte1" min="-2" pref="271" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="MonCompteNewPass" min="-2" pref="229" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                              <Component id="NewPasswordBtn" min="-2" pref="98" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+                                              <Component id="LogoutBtn" min="-2" pref="212" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="96" max="32767" attributes="0"/>
+                                  <EmptySpace pref="87" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -733,11 +794,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="msgMonCompte" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       <Component id="MonCompteNewPass" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                                       <Component id="NewPasswordBtn" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="msgMonCompte1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="msgChangePassword" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="LogoutBtn" min="-2" pref="53" max="-2" attributes="0"/>
                                   <EmptySpace pref="269" max="32767" attributes="0"/>
                               </Group>
@@ -745,12 +808,14 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="msgMonCompte">
+                        <Component class="javax.swing.JLabel" name="msgChangePassword">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Dialog" size="18" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Changement mot de passe"/>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="0" green="0" red="ff" type="rgb"/>
+                            </Property>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JPasswordField" name="MonCompteNewPass">
@@ -767,6 +832,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Valider"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NewPasswordBtnMouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="LogoutBtn">
                           <Properties>
@@ -774,6 +842,17 @@
                               <Font name="Dialog" size="18" style="1"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="D&#xe9;connexion"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LogoutBtnMouseClicked"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="msgMonCompte1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="18" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Changement mot de passe :"/>
                           </Properties>
                         </Component>
                       </SubComponents>

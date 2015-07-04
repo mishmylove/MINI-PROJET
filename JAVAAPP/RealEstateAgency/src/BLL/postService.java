@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package BLL;
+
 import DAO.postDAO;
 import Entite.Post;
 import java.sql.SQLException;
@@ -16,23 +17,21 @@ import java.util.logging.Logger;
  * @author halloul
  */
 public class postService {
-    
-     postDAO uDAO = new postDAO();
+
+    postDAO pDAO = new postDAO();
 
     public ArrayList<Post> getPostList() {
         try {
-            return uDAO.getPostList();
+            return pDAO.getPostList();
         } catch (SQLException ex) {
             Logger.getLogger(postService.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
- 
-
     public int deletePost(Post u) {
         try {
-            return uDAO.deletePost(u);
+            return pDAO.deletePost(u);
         } catch (SQLException ex) {
             Logger.getLogger(postService.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
@@ -42,7 +41,7 @@ public class postService {
     public int updatePost(Post u) {
 
         try {
-            return uDAO.updatePost(u);
+            return pDAO.updatePost(u);
         } catch (SQLException ex) {
             Logger.getLogger(postService.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
@@ -50,23 +49,23 @@ public class postService {
 
     }
 
-    public ArrayList<Post> searchPost(String filter, String text)  {
+    public ArrayList<Post> searchPost(String titre, String gouvernorat, String rubrique, String nature, String type, int prix)  {
+
         try {
-            return uDAO.searchPost(filter, text);
+            return pDAO.searchPost( titre,  gouvernorat,  rubrique,  nature,  type,  prix);
         } catch (SQLException ex) {
             Logger.getLogger(postService.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
-    
+
     public int AddPost(Post u) {
         try {
-            return uDAO.AddPost(u);
+            return pDAO.AddPost(u);
         } catch (SQLException ex) {
             Logger.getLogger(postService.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
     }
-    
-    
+
 }
