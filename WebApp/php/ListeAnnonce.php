@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
@@ -18,19 +19,17 @@
 		<![endif]-->
 	</head>
 	<body>
+
 <div class="container">
 			<!-- Top Navigation -->
 			<div class="site-top clearfix">
-				<span class="right"><a  href="#"><span>Déconnecté</span></a></span>
-				<span class="right"><a  href="php/AjoutAnnonce.php"><span>Ajouter Annonce</span></a></span>
+		        <span class="right"><a  href="logout.php"><span>Déconnecté</span></a></span>
+				<span class="right"><a  href="AjoutAnnonce.php"><span>Ajouter Annonce</span></a></span>
 				<span class="right"><a  href="#"><span>Listes Annonce</span></a></span>
-				<span class="right"><a  href="index.html"><span>Acceuil</span></a></span>
-
-
-		     <div class="logo-site"><h1><a href="index.html"> Logo </a> <h1></div>
+                <span class="right"><a  href="../Acceuil.html"><span>Accueil</span></a></span>
+		     <div class="logo-site"><h1><a href="../Acceuil.html"> Logo </a> <h1></div>
 		</div>
 		<header class="site-header">
-        
 			</header>
 </div>
 <div class="cntnt">

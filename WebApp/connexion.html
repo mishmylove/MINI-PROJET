@@ -33,6 +33,15 @@
 					<h2>Connexion</h2>
 			
 			<div class="register_account">
+				<?php
+			session_start();
+			if(isset($_SESSION['login']) && isset($_SESSION["pass"])){
+			header("Location:vendeur.html");
+				} 
+				?>
+
+
+
     		    <form method="POST" action="php/login.php" >
     			 <div>
 		   			<div><input type="text"  class="input-form" name="login" placeholder="Login (Mail)" required></div>

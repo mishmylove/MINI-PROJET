@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
@@ -18,15 +19,20 @@
 		<![endif]-->
 	</head>
 	<body>
+		<?php
+session_start();
+if(!isset($_SESSION['login']) || (!$_SESSION["pass"])){
+header("Location:php/logout.php");
+}
+?>
 <div class="container">
 			<!-- Top Navigation -->
 			<div class="site-top clearfix">
-				<span class="right"><a  href="#"><span>Déconnecté</span></a></span>
-				<span class="right"><a  href="php/ModifierAnnonce.php"><span>Modifier Annonce</span></a></span>
+				<span class="right"><a  href="php/logout.php"><span>Déconnecté</span></a></span>
 				<span class="right"><a  href="php/AjoutAnnonce.php"><span>Ajouter Annonce</span></a></span>
 				<span class="right"><a  href="php/ListeAnnonce.php"><span>Listes  Annonce</span></a></span>
-
-		     <div class="logo-site"><h1><a href="index.html"> Logo </a> <h1></div>
+                <span class="right"><a  href="Acceuil.html"><span>Accueil</span></a></span>
+		     <div class="logo-site"><h1><a href="Acceuil.html"> Logo </a> <h1></div>
 		</div>
 		<header class="site-header">
         <div id="slider1_container" style="display: none; position: relative; margin: 0 auto;
@@ -69,28 +75,7 @@
 	<form action="#" >
 	<div><input type="text"  class="searchProd"  placeholder=" Location, Pays, Gouvernorat ..." ></div>
 	<div>
-
-
-
-<select name="select" class="select-search required" >
-<?php
- $cnx = @mysql_connect( "localhost", "root", "" ) ;
-    $db = mysql_select_db( "realestatedb",$cnx  ) ;
-	$sql = "SELECT nom FROM gouvernorat";
-	$req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
-	 while( $result = mysql_fetch_object( $req ) )
-    {
-
-    echo "<option value=\"".$result->nom."\">".echo $result->nom."</option>\n  ";
-}
-?>
-</select>
-
-
-
-
-
-<select id="Rubrique"   name="Rubrique"  class="select-search required">
+   <select id="Rubrique"   name="Rubrique"  class="select-search required">
 			            <option value="null">----- Select Rubrique -----</option>         
 			            <option value="De">Demande</option>
 			            <option value="Of">Offre</option>
