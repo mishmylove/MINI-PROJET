@@ -390,11 +390,12 @@ font-size: 19px;
 }
 
 .discover {
- background-color: #0B0B0B;
+background-color: #0B0B0B;
   text-align: center;
   height: 137px;
   display: block;
   width: 100%;
+  margin-top: 5%;
   float: left;
   position: relative;
 
@@ -492,6 +493,7 @@ color: #767676;
   display: block;
   margin-bottom: 50px;
   float: left;
+  width: 100%;
 }
 
       #map-canvas {
@@ -648,12 +650,37 @@ width: 105.1%;
 
 
 
+.modif {
+  margin: 0 auto;
+  margin-bottom: 5%;
+  margin-top: 7%;
+  margin-left: -35%;
+}
 
+.input-form-modif {
+width: 216%;
+  height: 43px;
+  margin-bottom: 7px;
+  color: #232222;
+  font-size: 16px;
+  font-weight: 500;
+}
 
-
-
-
-
+.btn-modif {
+    margin: 0 auto;
+  text-align: center;
+  left: 50%;
+  position: relative;
+  width: 100%;
+  border: none;
+  float: right;
+  padding: 15px 50px;
+  color: #0B0B0B;
+  background: linear-gradient(rgb(255, 78, 3), rgb(255, 130, 0));
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
 
 
 
