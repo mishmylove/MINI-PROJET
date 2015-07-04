@@ -5,8 +5,8 @@
 }
 
 #etalage .etalage_thumb{
-  background: url(../images/loading.gif) center no-repeat;
-  border: 8px solid #1A1A1A;
+  border: 4px solid #FF5402;
+  border: 1px solid linear-gradient(rgb(255, 78, 3), rgb(255, 130, 0));
   padding: 6px;
 }
  
