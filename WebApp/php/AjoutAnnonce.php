@@ -33,7 +33,7 @@
         <header class="site-header">
       </header>
       <div class="search">   
-        <div> <a href="" class="btn-search">Decouvrir nos annonces</a></div>      
+        <div> <a href="ListeAnnonce.php" class="btn-search">Decouvrir nos annonces</a></div>      
         </div>
 
       <div class="content">

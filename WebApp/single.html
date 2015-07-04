@@ -67,34 +67,7 @@
  					  </div> !-->
 		    <header class="site-header">
 			</header>
-			
-			<div class="search">   
-		   			 	<form action="#" >
-		   			 	<div><input type="text"  class="searchProd"  placeholder=" Location, Pays, Gouvernorat ..." ></div>
-		    			<div><select id="Rubrique"   name="Rubrique"  class="select-search required">
-			            <option value="null">----- Select Rubrique -----</option>         
-			            <option value="De">Demande</option>
-			            <option value="Of">Offre</option>
-		                </select>
-		            	<select id="Nature"   name="Nature"  class="select-search required">
-			            <option value="null">----- Select Nature -----</option>         
-			            <option value="locatio,">Location</option>
-			            <option value="vente">Vente</option>
-			            <option value="terrain">Terrain</option>
-			            <option value="vacances">Location Vacances</option>
-			            <option value="bureaux">Bureaux & Commerces</option>
-			            <option value="partage">Partage</option>
-		                </select>	   
-						<select id="Type"   name="Type"  class="select-search required">
-			            <option value="null">----- Select Type -----</option>         
-			            <option value="De">Demande</option>
-			            <option value="Of">Offre</option>
-		                </select>	
-		            </div>		  
-		            <div></div>
-		            <div> <input type="submit" value="Rechercher"  class="btn-search"></input></div>      
-		    		</form>
-		    	</div>
+
 
 			<div class="content-prod">
 			
@@ -197,6 +170,134 @@
        	   	  <p>© All rights reserved | by EspritGroupe6</p>
        	   </div>
        	 </div>
+      <script type="text/javascript" src="js/jssor.slider.mini.js"></script>
+     <link rel="stylesheet" href="js/jquery.auto-complete.css">
+     <script src="js/jquery.auto-complete.js"></script>
+     <script type="text/javascript">
+			$( document ).ready(function() {
+    			console.log( "ready!" );
+    			var gouvglobal;
+    			$('#searchbar').autoComplete({
+    minChars: 2,
+    source: function(term, suggest){
+        term = term.toLowerCase();
+        var choices = ["Ariana",	
+"Béja",
+"Ben Arous",
+"Bizerte",
+"Gabès",
+"Gafsa",
+"Jendouba",
+"Kairouan",
+"Kasserine",
+"Kébili",
+"La Manouba",
+"Le Kef",
+"Mahdia",
+"Médenine",
+"Monastir",
+"Nabeul",
+"Sfax",
+"Sidi Bouzi",
+"Siliana",
+"Sousse",
+"Tataouine",
+"Tozeur",
+"Tunis",
+"Zaghouan"];
+        var matches = [];
+        for (i=0; i<choices.length; i++)
+            if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+        suggest(matches);
+    },
+    onSelect: function(e, term, item){
+        gouvglobal=term;
+getSearchPost(gouvglobal);
+    }
+});
+
+var postTemplate = "</figure><figure class='effect-honey'><img src='img/bedroom_small.jpg' alt='img04'/><figcaption><h2> {{titre}} <span>300m²</span> <i>Voir</i></h2><a href='single.html'>Lire La Suite</a></figcaption></figure>";
+
+
+
+
+
+$( "#rubrique" ).change(function() {
+getSearchPost(gouvglobal);
+});
+$( "#nature" ).change(function() {
+getSearchPost(gouvglobal);
+});
+$( "#type" ).change(function() {
+  getSearchPost(gouvglobal);
+});
+
+
+
+function getSearchPost(term){
+
+	var gouvernorat = term;
+	var rubrique = $( "#rubrique option:selected" ).val();
+	var nature = $( "#nature option:selected" ).val();
+	var type = $( "#type option:selected" ).val();
+
+
+$.ajax({
+  method: "GET",
+        cache:false,
+        url: "http://127.0.0.1/mini-projet/WebApp/php/search.php",
+        data: { gouvernorat: gouvernorat, 
+  		  rubrique: rubrique, 
+  		  nature: nature, 
+  		  type: type 
+  		},
+        dataType: 'json'
+})
+  .done(function( data ) {
+        	for(var i =0;i<data.length;i++){
+        	console.log(data.length);
+			var tmp = postTemplate;
+			tmp=tmp.replace("{{titre}}", data[i]["titre"]);
+			$("#contentContainer").append(tmp);
+			}
+  });
+	    /*$.ajax({
+	    method: "GET",
+        cache:false,
+        url: "http://127.0.0.1/MINI%20PROJET/WEBAPP/php/search.php",
+        data: { gouvernorat: gouvernorat, 
+  		  rubrique: rubrique, 
+  		  nature: nature, 
+  		  type: type 
+  		},
+        dataType: 'json',
+        done: function(json) {
+
+        	var data = json;
+
+        	for(var i =0;i<data.length;i++){
+        	console.log(data.length);
+			var tmp = postTemplate;
+			tmp=tmp.replace("{{titre}}", data[i]["titre"]);
+			$("#contentContainer").append(tmp);
+			}
+
+
+        },
+        error: function() {          
+            console.log("oops");
+            //Error message
+    }});*/
+
+	
+}
+
+
+
+//en doc ready ! 
+});
+		</script>
+
 		<script>
 			// For Demo purposes only (show hover effect on mobile devices)
 			[].slice.call( document.querySelectorAll('a[href="#"') ).forEach( function(el) {

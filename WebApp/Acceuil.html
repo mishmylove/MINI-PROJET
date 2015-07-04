@@ -63,7 +63,8 @@
         <!-- Jssor Slider End -->
 			</header>
 </div>
-<div class="cntnt">
+
+	<div class="cntnt">
 	<div class="search">   
 	<form action="#" >
 	<div><input type="text" id="searchbar" class="searchProd"  placeholder=" Gouvernorat ..." ></div>
@@ -99,71 +100,6 @@
 				<h2>Découvrez nos offres ; Achat , Vente ... </h2>
 				<div class="grid" id="contentContainer">
 					
-					<!--<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img04"/>
-						<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-					<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img05"/>
-						<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-					<<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img04"/>
-						<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-					<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img05"/>
-						<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-					<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img04"/>
-												<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-					<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img05"/>
-						<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-						<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img04"/>
-						<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-					<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img05"/>
-						<figcaption>
-							<h2>Dreamy <span>Honey</span> <i>Now</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-						<figure class="effect-honey">
-						<img src="img/bedroom_small.jpg" alt="img04"/>
-						<figcaption>
-							<h2>Maison <span>300m²</span> <i>Voir</i></h2>
-							<a href="single.html">Lire La Suite</a>
-						</figcaption>			
-					</figure>
-					-->
-				
 				</div>
 			</div>
 
@@ -171,6 +107,12 @@
 		 <a href="Products.html" class="shop-btn">Decouvrir nos annonces </a>
 		</div>
 </div>
+			
+
+		<div class="discover">
+		 <a href="Products.html" class="shop-btn">Decouvrir nos annonces </a>
+		</div>
+
      <!-- footer !-->
         <div class="footer">
        		<div style="  display: inline-block;   margin-right: 6%;">
@@ -301,7 +243,7 @@ function getSearchPost(term){
 $.ajax({
   method: "GET",
         cache:false,
-        url: "http://127.0.0.1/MINI%20PROJET/WEBAPP/php/search.php",
+        url: "http://127.0.0.1/mini-projet/WebApp/php/search.php",
         data: { gouvernorat: gouvernorat, 
   		  rubrique: rubrique, 
   		  nature: nature, 
