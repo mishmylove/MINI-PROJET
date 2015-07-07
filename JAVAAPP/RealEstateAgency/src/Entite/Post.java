@@ -5,14 +5,14 @@
  */
 package Entite;
 
-import java.io.Serializable;
+
 
 /**
  *
  * @author halloul
  */
 
-public class Post implements Serializable {
+public class Post  {
    
     
     private Integer id;
