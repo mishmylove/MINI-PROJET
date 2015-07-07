@@ -1,8 +1,8 @@
 # MINI-PROJET
 MINI PROJET ESPRIT
 
-#TODO : 
-- install wamp or easyphp
-- install mysql workbench 
-- import database, importMe.sql avec phpmyadmin ("root","")
+#TORUN : 
+- import database & data , importMe.sql avec phpmyadmin ("root","")
+- add java libs (jcommon,jfreechart,mysql connector)
+- clean & build & run & enjoy :) 
 
